@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    @ip = request.remote_ip
+
+    @user.ip_address.users << @ip
+
     respond_to do |format|
       if @user.save
         @user.gender.users << @user
