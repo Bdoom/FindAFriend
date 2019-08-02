@@ -15,7 +15,15 @@
   <%= form.text_field :zipcode %>
   <%= form.label :about_me, "About Me: " %><br />
   <%= form.text_area :about_me, id: 'about_me' %>
-  <%= form.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %>
+  <%= form.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %> <br />
+  <%= form.label :gender, 'Please set your gender: ' %> <br />
+  <%= form.collection_select :gender, Gender.order(:name),:id,:name, include_blank: true %> <br />
+
+  <%= form.label :sexuality, 'Please set your sexuality: ' %> <br />
+  <%= form.collection_select :sexuality, Sexuality.order(:name),:id,:name, include_blank: true %> <br />
+
+  <%= form.label :religion, 'Please set your religion: ' %> <br />
+  <%= form.collection_select :religion, Religion.order(:name),:id,:name, include_blank: true %> <br />
 
   <script type="text/javascript">
   $(document).ready(function() {
