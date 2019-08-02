@@ -29,6 +29,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.gender.users << @user
+        @user.race.users << @user
+        @user.sexuality.users << @user
+        @user.religion.users << @user
+
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
