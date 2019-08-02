@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :user_infos
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'

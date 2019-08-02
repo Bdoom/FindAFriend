@@ -26,6 +26,26 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.collection_select :gender_id, Gender.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sexuality %>
+    <%= form.collection_select :sexuality_id, Sexuality.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :race %>
+    <%= form.collection_select :race_id, Race.order(:name),:id,:name, include_blank: true %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :religion %>
+    <%= form.collection_select :religion_id, Religion.order(:name),:id,:name, include_blank: true %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

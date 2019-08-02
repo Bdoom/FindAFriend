@@ -6,12 +6,19 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, :presence => true,
-                       :confirmation => true,
-                       :length => {:within => 6..40},
-                       :on => :create
-  validates :password, :confirmation => true,
-                       :length => {:within => 6..40},
-                       :allow_blank => true,
-                       :on => :update
+  validates :password, presence: true,
+                       confirmation: true,
+                       length: { within: 6..40 },
+                       on: :create
+  validates :password, confirmation: true,
+                       length: { within: 6..40 },
+                       allow_blank: true,
+                       on: :update
+
+  validates :zipcode, zipcode: { country_code: :us }
+  validates :about_me, length: { minimum: 150, maximum: 3000 }
+
+  has_one :gender
+  has_one :sexuality
+  has_one :religion
 end

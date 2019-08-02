@@ -54,3 +54,11 @@ Religion.create!([
                    { name: 'Atheism' },
                    { name: 'Agnostic' }
                  ])
+
+Race.create!([
+               { name: 'White' },
+               { name: 'Black or African American' },
+               { name: 'American Indian or Alaska Native' },
+               { name: 'Asian' },
+               { name: 'Native Hawaiian or Other Pacific Islander' }
+             ])
