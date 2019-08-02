@@ -46,7 +46,39 @@
     <%= form.collection_select :religion_id, Religion.order(:name),:id,:name, include_blank: true %>
   </div>
 
+  <div class="field">
+    <%= form.label :zipcode %>
+    <%= form.text_field :zipcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :about_me, "About Me: " %><br />
+    <%= form.text_area :about_me, id: 'about_me' %>
+    <%= form.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#about_me').keyup(function(){
+      var minimum_characters = 150;
+      var count = $("#about_me").val().length;
+      var how_many_we_require = minimum_characters - count;
+      if (how_many_we_require < 0)
+      {
+        how_many_we_require = 0;
+      }
+      var text_to_show = 'You require ' + how_many_we_require + ' characters to submit.';
+      if (count >= 3000)
+      {
+        text_to_show = 'You have went over the maximum number of characters, 3000. Please shorten it. You currently are using: ' + count + ' characters.';
+      }
+      var can_submit = $('#can_submit');
+      can_submit.text(text_to_show);
+    });
+  });
+  </script>

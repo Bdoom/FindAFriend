@@ -19,6 +19,10 @@ class User < ApplicationRecord
   validates :about_me, length: { minimum: 150, maximum: 3000 }
 
   has_one :gender
+  has_one :race
   has_one :sexuality
   has_one :religion
+  has_many :activities
+
+  validates :about_me, length: { minimum: 150, maximum: 3000 }
 end

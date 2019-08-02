@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_025850) do
+ActiveRecord::Schema.define(version: 2019_08_02_142855) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 2019_08_02_025850) do
   end
 
   create_table "gender_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_info_id"
+    t.bigint "user_id"
+    t.bigint "gender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_info_id"], name: "index_gender_groups_on_user_info_id"
+    t.index ["gender_id"], name: "index_gender_groups_on_gender_id"
+    t.index ["user_id"], name: "index_gender_groups_on_user_id"
   end
 
   create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,35 +72,27 @@ ActiveRecord::Schema.define(version: 2019_08_02_025850) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "zipcode"
-    t.bigint "user_id"
-    t.text "about_me"
-    t.bigint "gender_id"
-    t.bigint "sexuality_id"
-    t.bigint "religion_id"
-    t.index ["gender_id"], name: "index_user_infos_on_gender_id"
-    t.index ["religion_id"], name: "index_user_infos_on_religion_id"
-    t.index ["sexuality_id"], name: "index_user_infos_on_sexuality_id"
-    t.index ["user_id"], name: "index_user_infos_on_user_id"
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_info_id"
+    t.bigint "race_id"
+    t.bigint "gender_id"
+    t.bigint "sexuality_id"
+    t.bigint "religion_id"
+    t.string "zipcode"
+    t.text "about_me"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["user_info_id"], name: "index_users_on_user_info_id"
+    t.index ["gender_id"], name: "index_users_on_gender_id"
+    t.index ["race_id"], name: "index_users_on_race_id"
+    t.index ["religion_id"], name: "index_users_on_religion_id"
+    t.index ["sexuality_id"], name: "index_users_on_sexuality_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "user_infos", "genders"
-  add_foreign_key "user_infos", "religions"
-  add_foreign_key "user_infos", "sexualities"
-  add_foreign_key "user_infos", "users"
-  add_foreign_key "users", "user_infos"
+  add_foreign_key "users", "genders"
+  add_foreign_key "users", "races"
+  add_foreign_key "users", "religions"
+  add_foreign_key "users", "sexualities"
 end
