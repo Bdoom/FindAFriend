@@ -27,8 +27,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     @ip = request.remote_ip
+    ipAddr = IpAddress.create([{ ip_address: @ip }])
 
-    @user.ip_address.users << @ip
+    if ipAddr.nil?
+      ipAddr = IpAddress.find_by(ip_address: @ip)
+      @user.ip_address_id = ipAddr.first.id
+    else
+      @user.ip_address_id = ipAddr.first.id
+    end
+
+    ipAddr.first.users << @user
 
     respond_to do |format|
       if @user.save

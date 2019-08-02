@@ -47,6 +47,7 @@ gem 'geocoder'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rails-erd' # Must also have graphviz.org installed, can simply run brew install graphviz on macosx with homebrew. 
 end
 
 group :development do

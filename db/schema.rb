@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_171503) do
+ActiveRecord::Schema.define(version: 2019_08_02_181118) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -125,8 +125,10 @@ ActiveRecord::Schema.define(version: 2019_08_02_171503) do
     t.bigint "religion_id"
     t.string "zipcode"
     t.text "about_me"
+    t.bigint "ip_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
+    t.index ["ip_address_id"], name: "index_users_on_ip_address_id"
     t.index ["race_id"], name: "index_users_on_race_id"
     t.index ["religion_id"], name: "index_users_on_religion_id"
     t.index ["sexuality_id"], name: "index_users_on_sexuality_id"
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_08_02_171503) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "users", "genders"
+  add_foreign_key "users", "ip_addresses"
   add_foreign_key "users", "races"
   add_foreign_key "users", "religions"
   add_foreign_key "users", "sexualities"
