@@ -31,6 +31,7 @@ class UserInfosController < ApplicationController
   # POST /user_infos.json
   def create
     redirect_to root_path, notice: 'You are not logged in to access this' if current_user.nil?
+    redirect_to root_path, notice: 'You can not create a new user info, you must edit your current one.' unless current_user.user_info.nil?
 
     @user_info = UserInfo.new(user_info_params)
     @user_info.user = current_user
@@ -85,6 +86,6 @@ class UserInfosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_info_params
-    params.fetch(:user_info, {}).permit(:zipcode)
+    params.fetch(:user_info, {}).permit(:zipcode, :about_me)
   end
 end
