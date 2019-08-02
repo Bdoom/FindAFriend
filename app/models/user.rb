@@ -18,10 +18,10 @@ class User < ApplicationRecord
   validates :zipcode, zipcode: { country_code: :us }
   validates :about_me, length: { minimum: 150, maximum: 3000 }
 
-  has_one :gender
-  has_one :race
-  has_one :sexuality
-  has_one :religion
+  belongs_to :gender
+  belongs_to :race
+  belongs_to :sexuality
+  belongs_to :religion
   has_many :activities
 
   validates :about_me, length: { minimum: 150, maximum: 3000 }
