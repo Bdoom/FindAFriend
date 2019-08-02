@@ -23,7 +23,7 @@ class User < ApplicationRecord
   belongs_to :religion
   has_many :activities
 
-  belongs_to :ip_address
+  belongs_to :ip_address, optional: true
 
   validates :about_me, length: { minimum: 150, maximum: 3000 }
 end
