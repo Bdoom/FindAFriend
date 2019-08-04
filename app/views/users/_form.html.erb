@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18) %>
+  </div>
+
+  <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>

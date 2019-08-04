@@ -1,6 +1,7 @@
 <p id=”alert”><%= alert %></p>
 <h1>Login</h1>
 <%= form_tag sessions_path do |form| %>
+  <p id="notice"><%= notice %></p>
   <div class=”field”>
     <%= label_tag :email %>
     <%= text_field_tag :email %>

@@ -15,6 +15,7 @@ class User < ApplicationRecord
                        on: :update
 
   has_many :activities
+  
   belongs_to :location, optional: true
 
   belongs_to :ip_address, optional: true
@@ -26,5 +27,13 @@ class User < ApplicationRecord
   enum religion: { buddhism: 'Buddhism', hinduism: 'Hinduism', sikhism: 'Sikhism', christianity: 'Christianity', catholicism: 'Catholicism', eastern_and_oriential_orthodoxy: 'Eastern and Oriental Orthodoxy', protestantism: 'Protestantism', restorationism: 'Restorationism', gnosticism: 'Gnosticism', islam: 'Islam', judaism: 'Judaism', atheism: 'Atheism', agnostic: 'Agnostic' }
   enum race: { white: 'White', black_or_african_american: 'Black or African American', asian: 'Asian', native_hawaiian_or_other_pacific_islander: 'Native Hawaiian or Other Pacific Islander' }
 
+  validate :validate_age
+
+  private
+  def validate_age
+      if birthdate.present? && birthdate > 18.years.ago
+          errors.add(:birthdate, 'You should be over 18 years old.')
+      end
+  end
 
 end
