@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_03_140142) do
+ActiveRecord::Schema.define(version: 2019_08_04_164240) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_140142) do
   end
 
   create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.string "city"
     t.string "country"
     t.string "address"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_140142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "zipcode"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -78,12 +80,15 @@ ActiveRecord::Schema.define(version: 2019_08_03_140142) do
     t.string "sexuality"
     t.string "religion"
     t.string "race"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["ip_address_id"], name: "index_users_on_ip_address_id"
     t.index ["location_id"], name: "index_users_on_location_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "locations", "users"
   add_foreign_key "users", "ip_addresses"
   add_foreign_key "users", "locations"
 end

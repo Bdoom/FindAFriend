@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   helper_method :current_user
-  rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
   before_action :update_ip_address
 
@@ -28,14 +27,16 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if session[:user_id]
+    
+    begin
       @current_user ||= User.find(session[:user_id])
+    rescue ActiveRecord::RecordNotFound => e
+      @current_user = nil
+    end
 
     else
       @current_user = nil
     end
   end
 
-  def handle_record_not_found
-    redirect_to logout_path
-  end
 end

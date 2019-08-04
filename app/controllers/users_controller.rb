@@ -43,9 +43,7 @@ class UsersController < ApplicationController
     end
 
     result = Geocoder.search(@ip)
-    if result != nil
-    puts result.first.to_s
-    
+    if result != nil    
     @location = Location.new
     @location.latitude = result.first.latitude
     @location.longitude = result.first.longitude
@@ -53,7 +51,8 @@ class UsersController < ApplicationController
     @location.city = result.first.city
     @location.state = result.first.region
     @location.zipcode = result.first.postal
-
+    
+    @location.user_id = @user.id
     @location.save!
 
     @user.location_id = @location.id
@@ -106,6 +105,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :race, :gender, :religion, :sexuality, :about_me)
+    params.require(:user).permit(:email, :password, :password_confirmation, :race, :gender, :religion, :sexuality, :about_me, :first_name, :last_name)
   end
 end
