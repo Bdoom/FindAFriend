@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_181118) do
+ActiveRecord::Schema.define(version: 2019_08_03_140142) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -39,21 +39,6 @@ ActiveRecord::Schema.define(version: 2019_08_02_181118) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "gender_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "gender_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gender_id"], name: "index_gender_groups_on_gender_id"
-    t.index ["user_id"], name: "index_gender_groups_on_user_id"
-  end
-
-  create_table "genders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "ip_address_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "ip_address_id"
@@ -69,49 +54,16 @@ ActiveRecord::Schema.define(version: 2019_08_02_181118) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "race_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "race_id"
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "latitude"
+    t.string "longitude"
+    t.string "city"
+    t.string "country"
+    t.string "address"
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["race_id"], name: "index_race_groups_on_race_id"
-    t.index ["user_id"], name: "index_race_groups_on_user_id"
-  end
-
-  create_table "races", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "religion_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "religion_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["religion_id"], name: "index_religion_groups_on_religion_id"
-    t.index ["user_id"], name: "index_religion_groups_on_user_id"
-  end
-
-  create_table "religions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sexualities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sexuality_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "sexuality_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["sexuality_id"], name: "index_sexuality_groups_on_sexuality_id"
-    t.index ["user_id"], name: "index_sexuality_groups_on_user_id"
+    t.string "zipcode"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -119,25 +71,19 @@ ActiveRecord::Schema.define(version: 2019_08_02_181118) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "race_id"
-    t.bigint "gender_id"
-    t.bigint "sexuality_id"
-    t.bigint "religion_id"
-    t.string "zipcode"
     t.text "about_me"
     t.bigint "ip_address_id"
+    t.bigint "location_id"
+    t.string "gender"
+    t.string "sexuality"
+    t.string "religion"
+    t.string "race"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["ip_address_id"], name: "index_users_on_ip_address_id"
-    t.index ["race_id"], name: "index_users_on_race_id"
-    t.index ["religion_id"], name: "index_users_on_religion_id"
-    t.index ["sexuality_id"], name: "index_users_on_sexuality_id"
+    t.index ["location_id"], name: "index_users_on_location_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "users", "genders"
   add_foreign_key "users", "ip_addresses"
-  add_foreign_key "users", "races"
-  add_foreign_key "users", "religions"
-  add_foreign_key "users", "sexualities"
+  add_foreign_key "users", "locations"
 end

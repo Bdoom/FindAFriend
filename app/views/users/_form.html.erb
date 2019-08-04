@@ -28,27 +28,22 @@
 
   <div class="field">
     <%= form.label :gender %>
-    <%= form.collection_select :gender_id, Gender.order(:name),:id,:name, include_blank: true %>
+    <%= form.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
   </div>
 
   <div class="field">
     <%= form.label :sexuality %>
-    <%= form.collection_select :sexuality_id, Sexuality.order(:name),:id,:name, include_blank: true %>
+    <%= form.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
   </div>
 
   <div class="field">
     <%= form.label :race %>
-    <%= form.collection_select :race_id, Race.order(:name),:id,:name, include_blank: true %>
+    <%= form.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
   </div>
   
   <div class="field">
     <%= form.label :religion %>
-    <%= form.collection_select :religion_id, Religion.order(:name),:id,:name, include_blank: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :zipcode %>
-    <%= form.text_field :zipcode %>
+    <%= form.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
   </div>
 
   <div class="field">
@@ -64,6 +59,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
     $('#about_me').keyup(function(){
       var minimum_characters = 150;
       var count = $("#about_me").val().length;

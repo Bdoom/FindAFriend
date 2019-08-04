@@ -23,6 +23,7 @@ Activity.create!([
                    { name: 'Concerts' }
                  ])
 
+=begin
 Gender.create!([
                  { name: 'Cis Male' },
                  { name: 'Cis Female' },
@@ -62,3 +63,4 @@ Race.create!([
                { name: 'Asian' },
                { name: 'Native Hawaiian or Other Pacific Islander' }
              ])
+=end

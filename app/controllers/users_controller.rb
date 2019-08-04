@@ -38,13 +38,32 @@ class UsersController < ApplicationController
 
     ipAddr.first.users << @user
 
+    unless Rails.env.production?
+      @ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+    end
+
+    result = Geocoder.search(@ip)
+    if result != nil
+    puts result.first.to_s
+    
+    @location = Location.new
+    @location.latitude = result.first.latitude
+    @location.longitude = result.first.longitude
+    @location.country = result.first.country
+    @location.city = result.first.city
+    @location.state = result.first.region
+    @location.zipcode = result.first.postal
+
+    @location.save!
+
+    @user.location_id = @location.id
+
+    end
+
+    
+
     respond_to do |format|
       if @user.save
-        @user.gender.users << @user
-        @user.race.users << @user
-        @user.sexuality.users << @user
-        @user.religion.users << @user
-
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -87,6 +106,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :race_id, :gender_id, :religion_id, :sexuality_id, :about_me, :zipcode)
+    params.require(:user).permit(:email, :password, :password_confirmation, :race, :gender, :religion, :sexuality, :about_me)
   end
 end
