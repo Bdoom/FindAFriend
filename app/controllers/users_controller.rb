@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[edit update destroy]
+  before_action :check_user, only: %i[edit update_activities]
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
+  def update_activities
+    puts 'lol'
+    begin
+      puts "activities params: #{update_activities_params.to_s} "
+      activity = Activity.find update_activities_params.id
+      current_user.activities << activity
+    rescue ActiveRecord::RecordNotFound => e
+      activity = nil
+    end
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show; end
+  def update_activities_params
+    params.permit(:id)
+  end
+
+  def check_user
+    if current_user.id.to_i != params[:id].to_i
+      redirect_to root_path, notice: 'You can only edit your own user.'
+    end
+  end
 
   # GET /users/new
   def new
@@ -19,7 +31,9 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    
+  end
 
   # POST /users
   # POST /users.json
@@ -98,7 +112,7 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.find(params[:id])
+      @user = User.find(params[:id])    
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

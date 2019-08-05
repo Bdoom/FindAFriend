@@ -3,3 +3,47 @@
 <%= link_to 'Logout', logout_path %>
 <%= link_to 'Edit User Details', edit_user_path(current_user) %>
 <span> add link to delete user </span>
+<p id="notice"><%= notice %></p>
+
+<ul>
+<% Activity.all.each do | activity | %>
+    <% if !current_user.activities.include? activity.id %>
+        <li> <%= link_to activity.name.to_s, '#', id: activity.id, class: 'activity_link' %> </li> 
+    <% end %>
+<% end %>
+</ul>
+
+You're liked activities:
+<% current_user.activities.each do |activity| %>
+    <%= activity.name %> ~~ Add ability to unlike
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $('.activity_link').click(function(){
+        var id = $(this).attr('id')
+        update_activities(id)
+        $(this).text('Liked.')
+    });
+    
+    function update_activities(id)
+    {
+
+        console.log ('doing req')
+    $.ajax({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'PUT',
+        url: '/update_user_likes',
+        data: { id: id },
+        success: function(response) {
+            // update item name here
+            console.log('done')
+        }
+    });
+    }
+});
+    
+</script>

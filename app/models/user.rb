@@ -14,8 +14,9 @@ class User < ApplicationRecord
                        allow_blank: true,
                        on: :update
 
-  has_many :activities
-  
+  has_many :activity_group
+  has_many :activities, through: :activity_group
+
   belongs_to :location, optional: true
 
   belongs_to :ip_address, optional: true
