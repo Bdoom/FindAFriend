@@ -13,10 +13,16 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy', as: 'logout'
   get '/findafriend', to: 'find_a_friend#search', as: 'findafriend'
   get '/dashboard', to: 'find_a_friend#dashboard', as: 'dashboard'
-  put '/update_activities', to: 'users#update_activities', as: 'update_activities'
+  
+  resources :activities, only: [] do 
+    collection do 
+      put 'add_activity_to_user'
+      patch 'add_activity_to_user'
+      get 'get_user_likes'
+    end 
+  end
 
-#  match '/update_user_likes/:id' => 'categories#show', via: [:get, :post]
-
+  get 'api/status', controller: 'api', action: 'status'
 
   root 'home#index'
 end

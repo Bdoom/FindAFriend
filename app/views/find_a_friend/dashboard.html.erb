@@ -14,9 +14,13 @@
 </ul>
 
 You're liked activities:
+<ul>
 <% current_user.activities.each do |activity| %>
-    <%= activity.name %> ~~ Add ability to unlike
+    <li>
+        <%= activity.name %> ~~ Add ability to unlike
+    </li>
 <% end %>
+</ul>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -24,23 +28,21 @@ $(document).ready(function() {
     $('.activity_link').click(function(){
         var id = $(this).attr('id')
         update_activities(id)
-        $(this).text('Liked.')
+
     });
     
     function update_activities(id)
     {
 
-        console.log ('doing req')
     $.ajax({
         headers: {
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
-        method: 'PUT',
-        url: '/update_user_likes',
+        method: 'PATCH',
+        url: '/activities/add_activity_to_user',
         data: { id: id },
         success: function(response) {
-            // update item name here
-            console.log('done')
+           
         }
     });
     }
