@@ -24,7 +24,10 @@ class FindAFriendController < ApplicationController
   end
 
   def dashboard
-      render 'find_a_friend/dashboard'
+    @our_activities = current_user.activities.to_a
+    @all_activities = (Activity.all.to_a - @our_activities)
+
+    render 'find_a_friend/dashboard'
   end
 
 

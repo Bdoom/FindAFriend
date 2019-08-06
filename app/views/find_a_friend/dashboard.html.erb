@@ -5,47 +5,5 @@
 <span> add link to delete user </span>
 <p id="notice"><%= notice %></p>
 
-<ul>
-<% Activity.all.each do | activity | %>
-    <% if !current_user.activities.include? activity.id %>
-        <li> <%= link_to activity.name.to_s, '#', id: activity.id, class: 'activity_link' %> </li> 
-    <% end %>
-<% end %>
-</ul>
+<%= react_component("Activities") %>
 
-You're liked activities:
-<ul>
-<% current_user.activities.each do |activity| %>
-    <li>
-        <%= activity.name %> ~~ Add ability to unlike
-    </li>
-<% end %>
-</ul>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    
-    $('.activity_link').click(function(){
-        var id = $(this).attr('id')
-        update_activities(id)
-
-    });
-    
-    function update_activities(id)
-    {
-
-    $.ajax({
-        headers: {
-            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        },
-        method: 'PATCH',
-        url: '/activities/add_activity_to_user',
-        data: { id: id },
-        success: function(response) {
-           
-        }
-    });
-    }
-});
-    
-</script>

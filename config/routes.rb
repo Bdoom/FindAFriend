@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     collection do 
       put 'add_activity_to_user'
       patch 'add_activity_to_user'
-      get 'get_user_likes'
+      patch 'remove_activity_from_user'
+      get 'get_activity_list'
     end 
   end
 
