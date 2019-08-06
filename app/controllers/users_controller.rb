@@ -2,7 +2,11 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
-  before_action :check_user, only: %i[edit update_activities]
+  before_action :check_user, only: %i[edit destroy update_activities]
+
+  def index
+    redirect_to root_path
+  end
 
   def update_activities
     puts 'lol'
@@ -65,8 +69,6 @@ class UsersController < ApplicationController
     @location.city = result.first.city
     @location.state = result.first.region
     @location.zipcode = result.first.postal
-    
-    @location.user_id = @user.id
     @location.save!
 
     @user.location_id = @location.id
@@ -75,6 +77,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @location.user_id = @user.id
         format.html { redirect_to login_path, notice: 'User was successfully created. Please login now.' }
         format.json { render :show, status: :created, location: @user }
       else

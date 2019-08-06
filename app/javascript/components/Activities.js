@@ -3,12 +3,16 @@ import PropTypes from "prop-types"
 import axios from "axios"
 
 class Activities extends React.Component {
+  _isMounted = false;
+
 
   constructor(props)
   {
     super(props)
-    this.handleClick = this.handleClick.bind(this);
-    this.loadData = this.loadData.bind(this)
+    this.handleClick_add_to_user = this.handleClick_add_to_user.bind(this);
+    this.handleClick_remove_from_user = this.handleClick_remove_from_user.bind(this);
+
+    this.loadData = this.loadData.bind(this);
     this.state = {
       our_activities: [],
       all_activities: []
@@ -16,15 +20,33 @@ class Activities extends React.Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
   }
   
 
   componentDidMount() {
+    this._isMounted = true;
     this.loadData();
   }
   
+  handleClick_remove_from_user(e)
+  {
+    var id = e.target.id;
+    axios({
+      method: 'PATCH', 
+      url: '/activities/remove_activity_from_user',
+      data: { id: id },
+      headers: {
+        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+      }
+    })
+    .then((response) => {
+      this.loadData();
+    });
 
-  handleClick(e)
+  }
+
+  handleClick_add_to_user(e)
   {
     var id = e.target.id;
 
@@ -44,7 +66,6 @@ class Activities extends React.Component {
 
   loadData()
   {
-    console.log('5555 tet')
     axios({
       method: 'GET', 
       url: '/activities/get_activity_list',
@@ -53,10 +74,13 @@ class Activities extends React.Component {
       }
     })
     .then((response) => {
+      if (this._isMounted) {
         this.setState({
           our_activities: response.data.our_activities,
           all_activities: response.data.all_activities
         });
+      }
+      
     });
 
   }
@@ -65,25 +89,29 @@ class Activities extends React.Component {
     var our_activities_jsonArray = this.state.our_activities;
     var all_activities_jsonArray = this.state.all_activities;
 
-    var our_activity_nodes = our_activities_jsonArray.map(function (activity, index) {
+    var our_activity_nodes = our_activities_jsonArray.map((activity, index) => {
       return (
-        <div name={activity.name} key={index}> {activity.name} </div>
+        <div key={index}><a onClick={this.handleClick_remove_from_user} id={activity.id} href="#">{activity.name}</a></div>
       );
     }); 
 
     var all_activity_nodes = all_activities_jsonArray.map((activity, index) => {
         return (
-          <div key={index}><a onClick={this.handleClick} id={activity.id} href="#">{activity.name}</a></div>
+          <div key={index}><a onClick={this.handleClick_add_to_user} id={activity.id} href="#">{activity.name}</a></div>
         );
     });
 
     return (
       <React.Fragment>
+        <h1>Purpose of activities</h1>
+        <p>The activities you select below will determine who you are matched with.</p>
+
         <h3>Current liked activities:</h3>
         { our_activity_nodes }
         < br/><hr />
-        <h3>All activities:</h3>
+        <h3>All activities:</h3>        
         { all_activity_nodes }
+        
         
       </React.Fragment>
     );

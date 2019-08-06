@@ -2,7 +2,8 @@
 <%= link_to 'Find a Friend', findafriend_path %>
 <%= link_to 'Logout', logout_path %>
 <%= link_to 'Edit User Details', edit_user_path(current_user) %>
-<span> add link to delete user </span>
+<%= link_to 'Delete User Account', user_path(current_user), method: :delete, data: {confirm: "Are you sure? Deletion of your account CANNOT BE UNDONE and is immediate as soon as you hit OK. " } %> 
+
 <p id="notice"><%= notice %></p>
 
 <%= react_component("Activities") %>

@@ -100,5 +100,5 @@ ActiveRecord::Schema.define(version: 2019_08_05_001112) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "users"
   add_foreign_key "users", "ip_addresses"
-  add_foreign_key "users", "locations"
+  add_foreign_key "users", "locations", on_delete: :cascade
 end
