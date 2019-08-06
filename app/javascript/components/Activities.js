@@ -91,13 +91,13 @@ class Activities extends React.Component {
 
     var our_activity_nodes = our_activities_jsonArray.map((activity, index) => {
       return (
-        <div key={index}><a onClick={this.handleClick_remove_from_user} id={activity.id} href="#">{activity.name}</a></div>
+        <div key={index}><a className="list-group-item list-group-item-action" onClick={this.handleClick_remove_from_user} id={activity.id} href="#">{activity.name}</a></div>
       );
     }); 
 
     var all_activity_nodes = all_activities_jsonArray.map((activity, index) => {
         return (
-          <div key={index}><a onClick={this.handleClick_add_to_user} id={activity.id} href="#">{activity.name}</a></div>
+          <div key={index}><a className="list-group-item list-group-item-action" onClick={this.handleClick_add_to_user} id={activity.id} href="#">{activity.name}</a></div>
         );
     });
 
@@ -106,13 +106,16 @@ class Activities extends React.Component {
         <h1>Purpose of activities</h1>
         <p>The activities you select below will determine who you are matched with.</p>
 
-        <h3>Current liked activities:</h3>
-        { our_activity_nodes }
+        <h3>Current liked activities (click to remove):</h3>
+        <div className="list-group">
+          { our_activity_nodes }
+        </div>
         < br/><hr />
-        <h3>All activities:</h3>        
-        { all_activity_nodes }
-        
-        
+        <h3>All activities (click to add):</h3>    
+        <div className="list-group">    
+          { all_activity_nodes }
+        </div>
+
       </React.Fragment>
     );
   }

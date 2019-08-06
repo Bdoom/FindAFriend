@@ -1,10 +1,22 @@
-<%= link_to 'Home', root_path %>
-<%= link_to 'Find a Friend', findafriend_path %>
-<%= link_to 'Logout', logout_path %>
-<%= link_to 'Edit User Details', edit_user_path(current_user) %>
-<%= link_to 'Delete User Account', user_path(current_user), method: :delete, data: {confirm: "Are you sure? Deletion of your account CANNOT BE UNDONE and is immediate as soon as you hit OK. " } %> 
+<ul class="nav nav-pills">
+<li class="nav-item">
+<%= link_to 'Home', root_path, class: 'nav-link' %>
+</li>
+<li class="nav-item">
+<%= link_to 'Find a Friend', findafriend_path, class: 'nav-link' %>
+</li>
+<li class="nav-item">
+<%= link_to 'Logout', logout_path, class: 'nav-link'%>
+</li>
+<li class="nav-item">
+<%= link_to 'Edit User Details', edit_user_path(current_user), class: 'nav-link'%>
+</li>
+<li class="nav-item">
+<%= link_to 'Delete User Account', user_path(current_user), class: 'nav-link', method: :delete, data: {confirm: "Are you sure? Deletion of your account CANNOT BE UNDONE and is immediate as soon as you hit OK. " } %> 
+</li>
 
+<span> add link to 1 on 1 chats and chat rooms </span>
+</ul>
 <p id="notice"><%= notice %></p>
 
 <%= react_component("Activities") %>
-

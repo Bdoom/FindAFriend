@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
 
   def update_activities
-    puts 'lol'
     begin
       puts "activities params: #{update_activities_params.to_s} "
       activity = Activity.find update_activities_params.id
