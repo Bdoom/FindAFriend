@@ -9,10 +9,7 @@
 <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'%>
 </li>
 <li class="nav-item">
-<%= link_to 'Edit User Details', edit_user_path(current_user), class: 'nav-link'%>
-</li>
-<li class="nav-item">
-<%= link_to 'Delete User Account', user_path(current_user), class: 'nav-link', method: :delete, data: {confirm: "Are you sure? Deletion of your account CANNOT BE UNDONE and is immediate as soon as you hit OK. " } %> 
+<%= link_to 'Edit User Details', edit_user_registration_path(current_user), class: 'nav-link'%>
 </li>
 
 <span> add link to 1 on 1 chats and chat rooms </span>
