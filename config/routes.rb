@@ -1,18 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
 
-  #devise_for :users
-  
-  resources :users
 
+  devise_for :users, path:  '', path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" }
   resources :sessions, only: %i[new create destroy]
 
-  get '/signup', to: 'users#new', as: 'signup'
-  get '/logout', to: 'sessions#destroy', as: 'logout'
   get '/findafriend', to: 'find_a_friend#search', as: 'findafriend'
   get '/dashboard', to: 'find_a_friend#dashboard', as: 'dashboard'
   

@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :birthdate, :gender, :sexuality, :race, :religion, :about_me])
+  end
 
   before_action :update_ip_address
+  
 
   def update_ip_address
     unless current_user.nil?
@@ -22,20 +30,6 @@ class ApplicationController < ActionController::Base
         ipAddr.users << current_user
       end
 
-    end
-  end
-
-  def current_user
-    if session[:user_id]
-    
-    begin
-      @current_user ||= User.find(session[:user_id])
-    rescue ActiveRecord::RecordNotFound => e
-      @current_user = nil
-    end
-
-    else
-      @current_user = nil
     end
   end
 

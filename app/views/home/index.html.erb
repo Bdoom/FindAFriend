@@ -1,10 +1,8 @@
 <h1>Welcome to FindAFriend</h1>
 <p>If you do not have an account, then you were not invited here. This is an invite only website.</p>
 
-<p id=”alert”><%= alert %></p>
 <h1>Login</h1>
 <%= form_tag sessions_path do |form| %>
-  <p id="notice"><%= notice %></p>
   <div class="form-group">
     <%= label_tag :email %>
     <%= text_field_tag :email, '', class: 'form-control' %>
