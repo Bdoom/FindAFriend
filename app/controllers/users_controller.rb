@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    Rails.logger.warning 'Need to add information regarding invite codes. Must validate invite code to create or register new user.'
     @user = User.new
   end
 

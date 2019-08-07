@@ -11,64 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :birthdate %>
-    <%= form.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18) %>
+  <div class="form-group">
+    <%= form.label :birthdate %> <br/>
+    <%= form.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control') %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
+  <div class="form-group">
+    <%= form.label :gender %> <br/>
+    <%= form.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :sexuality %>
-    <%= form.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
+  <div class="form-group">
+    <%= form.label :sexuality %> <br/>
+    <%= form.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :race %>
-    <%= form.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
+  <div class="form-group">
+    <%= form.label :race %> <br/>
+    <%= form.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
   </div>
   
-  <div class="field">
-    <%= form.label :religion %>
-    <%= form.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, v]}) %>
+  <div class="form-group">
+    <%= form.label :religion %> <br/>
+    <%= form.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :about_me, "About Me: " %><br />
-    <%= form.text_area :about_me, id: 'about_me' %>
+    <%= form.text_area :about_me, id: 'about_me', class: 'form-control' %>
     <%= form.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
   </div>
 <% end %>
 

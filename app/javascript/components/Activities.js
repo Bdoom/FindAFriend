@@ -115,7 +115,6 @@ class Activities extends React.Component {
         <div className="list-group">    
           { all_activity_nodes }
         </div>
-
       </React.Fragment>
     );
   }
