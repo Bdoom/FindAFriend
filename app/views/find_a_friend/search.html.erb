@@ -1,3 +1,56 @@
-<% @locations.each do | location | %>
-    <%= location.user.first_name %>
+<ul class="nav nav-pills">
+<li class="nav-item">
+<%= link_to 'Home', root_path, class: 'nav-link' %>
+</li>
+<li class="nav-item">
+<%= link_to 'Find a Friend', findafriend_path, class: 'nav-link' %>
+</li>
+<li class="nav-item">
+<%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'%>
+</li>
+<li class="nav-item">
+<%= link_to 'Edit User Details', edit_user_registration_path(current_user), class: 'nav-link'%>
+</li>
+
+<span> add link to 1 on 1 chats and chat rooms </span>
+</ul>
+
+<br />
+<table id="friendo-datatable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th class="th-sm">Name</th>
+<th class="th-sm">About Me</th>
+<th class="th-sm">Gender</th>
+<th class="th-sm">Sexuality</th>
+<th class="th-sm">Religion</th>
+<th class="th-sm">Race</th>
+<th class="th-sm">Birthdate</th>
+</tr>
+</thead>
+<tbody>
+<% @potential_friends.each do |friendo| %>
+    <% if friendo != current_user %>
+    <tr>
+        <td><%= friendo.first_name + ' ' + friendo.last_name %></td>
+        <td><%= friendo.about_me %></td>
+        <td><%= friendo.gender %></td>
+        <td><%= friendo.sexuality %></td>
+        <td><%= friendo.religion %></td>
+        <td><%= friendo.race %></td>
+        <td><%= friendo.birthdate %></td>
+    </tr>        
+    <% end %>
 <% end %>
+</tbody>
+</table>
+
+<script type="text/javascript">
+// Basic example
+$(document).ready(function () {
+  $('#friendo-datatable').DataTable({
+    "paging": true // false to disable pagination (or any other option)
+  });
+});
+
+</script>
