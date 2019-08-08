@@ -3,41 +3,105 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
   </div>
+
+<div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :birthdate %> <br/>
+    <%= f.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gender %> <br/>
+    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sexuality %> <br/>
+    <%= f.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :race %> <br/>
+    <%= f.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :religion %> <br/>
+    <%= f.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :about_me, "About Me: " %><br />
+    <%= f.text_area :about_me, id: 'about_me', class: 'form-control' %>
+    <%= f.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %>
+  </div>
+  
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: 'btn btn-primary' %>
   </div>
 <% end %>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
 
 <%= link_to "Back", :back %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#about_me').keyup(function(){
+      var minimum_characters = 150;
+      var count = $("#about_me").val().length;
+      var how_many_we_require = minimum_characters - count;
+      if (how_many_we_require < 0)
+      {
+        how_many_we_require = 0;
+      }
+      var text_to_show = 'You require ' + how_many_we_require + ' characters to submit.';
+      if (count >= 3000)
+      {
+        text_to_show = 'You have went over the maximum number of characters, 3000. Please shorten it. You currently are using: ' + count + ' characters.';
+      }
+      var can_submit = $('#can_submit');
+      can_submit.text(text_to_show);
+    });
+  });
+  </script>

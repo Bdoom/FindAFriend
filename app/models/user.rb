@@ -3,24 +3,23 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
 
+  validates :invite_code, presence: true
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true,
-                       confirmation: true,
-                       length: { within: 6..40 },
-                       on: :create
-  validates :password, confirmation: true,
-                       length: { within: 6..40 },
-                       allow_blank: true,
-                       on: :update
+  #validates :password, presence: true,
+  #                     confirmation: true,
+  #                     length: { within: 6..40 },
+  #                     on: :create
+  #validates :password, confirmation: true,
+  #                     length: { within: 6..40 },
+  #                     allow_blank: true,
+  #                     on: :update
 
   has_many :activity_group
   has_many :activities, through: :activity_group
 
   belongs_to :location, optional: true
-
-  belongs_to :ip_address, optional: true
 
   validates :about_me, length: { minimum: 150, maximum: 3000 }
 

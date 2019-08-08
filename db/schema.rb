@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_175021) do
+ActiveRecord::Schema.define(version: 2019_08_07_220426) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -48,17 +48,9 @@ ActiveRecord::Schema.define(version: 2019_08_07_175021) do
     t.index ["user_id"], name: "index_activity_groups_on_user_id"
   end
 
-  create_table "ip_address_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "ip_address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ip_address_id"], name: "index_ip_address_groups_on_ip_address_id"
-    t.index ["user_id"], name: "index_ip_address_groups_on_user_id"
-  end
-
-  create_table "ip_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "ip_address"
+  create_table "invite_codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "invite_code"
+    t.boolean "used", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -81,7 +73,6 @@ ActiveRecord::Schema.define(version: 2019_08_07_175021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "about_me"
-    t.bigint "ip_address_id"
     t.bigint "location_id"
     t.string "gender"
     t.string "sexuality"
@@ -103,14 +94,13 @@ ActiveRecord::Schema.define(version: 2019_08_07_175021) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "invite_code"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["ip_address_id"], name: "index_users_on_ip_address_id"
     t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "users"
-  add_foreign_key "users", "ip_addresses"
   add_foreign_key "users", "locations", on_delete: :cascade
 end

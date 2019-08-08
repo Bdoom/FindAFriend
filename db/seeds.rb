@@ -22,3 +22,10 @@ Activity.create!([
                    { name: 'Karaoke' },
                    { name: 'Concerts' }
                  ])
+
+invite_codes = (0...1000).map { { invite_code: SecureRandom.hex(7) } }
+invite_codes = invite_codes.uniq
+               
+invite_codes.each do |invite_code|
+  InviteCode.find_or_create_by!( invite_code )
+end
