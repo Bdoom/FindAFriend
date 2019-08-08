@@ -43,12 +43,12 @@
 
   <div class="form-group">
     <%= f.label :birthdate %> <br/>
-    <%= f.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control') %>
+    <%= f.date_field(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control') %>
   </div>
 
   <div class="form-group">
     <%= f.label :gender %> <br/>
-    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}, selected: 2), class: 'form-control' %>
   </div>
 
   <div class="form-group">

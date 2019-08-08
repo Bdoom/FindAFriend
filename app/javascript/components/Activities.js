@@ -5,7 +5,6 @@ import axios from "axios"
 class Activities extends React.Component {
   _isMounted = false;
 
-
   constructor(props)
   {
     super(props)
