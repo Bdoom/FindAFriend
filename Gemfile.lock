@@ -170,6 +170,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    redis (4.1.2)
     regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -258,6 +259,7 @@ DEPENDENCIES
   rails-erd
   ransack
   react-rails
+  redis (~> 4.0)
   rubocop
   rufo
   sass-rails (~> 5.0)
