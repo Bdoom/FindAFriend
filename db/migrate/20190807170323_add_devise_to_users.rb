@@ -20,8 +20,10 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
-      t.string   :current_sign_in_ip
-      t.string   :last_sign_in_ip
+      t.inet   :current_sign_in_ip # for postgres
+      t.inet   :last_sign_in_ip # for postgres
+      #t.string   :current_sign_in_ip # for mysql
+      #t.string   :last_sign_in_ip # for mysql 
 
       ## Confirmable
       # t.string   :confirmation_token

@@ -2,8 +2,8 @@ import consumer from "./consumer"
  
 const chatChannel = consumer.subscriptions.create({ channel: "HelloWorldChannel", room: "test" }, {
     received(data) {
-      // data => { sent_by: "Paul", body: "This is a cool chat app." }
       console.log(data);
+
     },
 
     connected()

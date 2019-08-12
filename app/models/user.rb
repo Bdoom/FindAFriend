@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
 
   validates :invite_code, presence: true
+  
+  has_friendship
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
