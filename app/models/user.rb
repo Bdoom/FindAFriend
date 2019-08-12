@@ -5,21 +5,11 @@ class User < ApplicationRecord
 
   validates :invite_code, presence: true
   
+  acts_as_liker
   has_friendship
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  #validates :password, presence: true,
-  #                     confirmation: true,
-  #                     length: { within: 6..40 },
-  #                     on: :create
-  #validates :password, confirmation: true,
-  #                     length: { within: 6..40 },
-  #                     allow_blank: true,
-  #                     on: :update
-
-  has_many :activity_group
-  has_many :activities, through: :activity_group
 
   belongs_to :location, optional: true
 

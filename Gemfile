@@ -47,6 +47,7 @@ gem 'react-rails'
 gem 'devise'
 gem 'ransack'
 gem 'has_friendship'
+gem 'socialization'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
