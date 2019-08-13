@@ -21,6 +21,11 @@ class FindAFriendController < ApplicationController
         our_activities_string.push(activity.name)
       end
     end
+
+    #Like.joins("INNER JOIN users ON users.id = likes.liker_id AND likes.liker_id = $#{current_user.id}").each do |like|
+    #  liker_user = User.find like.liker_id
+    #  actvity_liked = Activity.find like.likeable_id
+    #end
     
         
     locations.each do |location|
@@ -30,7 +35,7 @@ class FindAFriendController < ApplicationController
     users_in_our_area.each do |user|
       other_users_liked_activities = []
       other_user = User.find user.id
-      
+
       
       Activity.all.each do |activity|
         if other_user.likes?(activity)
