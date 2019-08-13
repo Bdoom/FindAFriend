@@ -54,10 +54,9 @@ class FindAFriendController < ApplicationController
     potential_friends = []
     
     our_activities_string = []
-    our_user = User.find current_user.id
 
     Activity.all.each do |activity|
-      if our_user.likes?(activity)
+      if current_user.following?(activity)
         our_activities_string.push(activity.name)
       end
     end
@@ -78,7 +77,7 @@ class FindAFriendController < ApplicationController
 
       
       Activity.all.each do |activity|
-        if other_user.likes?(activity)
+        if other_user.following?(activity)
           other_users_liked_activities.push(activity.name)
         end
       end
