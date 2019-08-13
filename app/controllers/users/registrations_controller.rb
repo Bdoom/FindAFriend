@@ -50,6 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @location.city = result.first.city
     @location.state = result.first.region
     @location.zipcode = result.first.postal
+    @location.user_id = resource.id
     @location.save!
 
     resource.location_id = @location.id

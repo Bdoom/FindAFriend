@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_160752) do
+ActiveRecord::Schema.define(version: 2019_08_12_180923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,13 +42,14 @@ ActiveRecord::Schema.define(version: 2019_08_12_160752) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "activity_groups", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "activity_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_activity_groups_on_activity_id"
-    t.index ["user_id"], name: "index_activity_groups_on_user_id"
+  create_table "follows", force: :cascade do |t|
+    t.string "follower_type"
+    t.integer "follower_id"
+    t.string "followable_type"
+    t.integer "followable_id"
+    t.datetime "created_at"
+    t.index ["followable_id", "followable_type"], name: "fk_followables"
+    t.index ["follower_id", "follower_type"], name: "fk_follows"
   end
 
   create_table "friendships", id: :serial, force: :cascade do |t|
@@ -69,6 +70,16 @@ ActiveRecord::Schema.define(version: 2019_08_12_160752) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.string "liker_type"
+    t.integer "liker_id"
+    t.string "likeable_type"
+    t.integer "likeable_id"
+    t.datetime "created_at"
+    t.index ["likeable_id", "likeable_type"], name: "fk_likeables"
+    t.index ["liker_id", "liker_type"], name: "fk_likes"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
@@ -81,6 +92,16 @@ ActiveRecord::Schema.define(version: 2019_08_12_160752) do
     t.string "zipcode"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
+  end
+
+  create_table "mentions", force: :cascade do |t|
+    t.string "mentioner_type"
+    t.integer "mentioner_id"
+    t.string "mentionable_type"
+    t.integer "mentionable_id"
+    t.datetime "created_at"
+    t.index ["mentionable_id", "mentionable_type"], name: "fk_mentionables"
+    t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
   end
 
   create_table "users", force: :cascade do |t|

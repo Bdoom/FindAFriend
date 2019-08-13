@@ -14,18 +14,32 @@ class FindAFriendController < ApplicationController
     potential_friends = []
     
     our_activities_string = []
+    our_user = User.find current_user.id
 
-    current_user.activities.each do |activity|
-      our_activities_string.push(activity.name)
+    Activity.all.each do |activity|
+      if our_user.likes?(activity)
+        our_activities_string.push(activity.name)
+      end
     end
+    
         
     locations.each do |location|
       users_in_our_area.push(location.user)
     end
 
     users_in_our_area.each do |user|
-      user.activities.each do | activity |
-        if our_activities_string.include? activity.name
+      other_users_liked_activities = []
+      other_user = User.find user.id
+      
+      
+      Activity.all.each do |activity|
+        if other_user.likes?(activity)
+          other_users_liked_activities.push(activity.name)
+        end
+      end
+      
+      other_users_liked_activities.each do | activity_name |
+        if our_activities_string.include? activity_name
             potential_friends.push(user)
         end
       end
@@ -35,9 +49,6 @@ class FindAFriendController < ApplicationController
   end
 
   def dashboard
-    @our_activities = current_user.activities.to_a
-    @all_activities = (Activity.all.to_a - @our_activities)
-
     render 'find_a_friend/dashboard'
   end
 
