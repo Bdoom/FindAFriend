@@ -8,6 +8,46 @@ class FindAFriendController < ApplicationController
     render 'find_a_friend/search'
   end
 
+  def get_friends_list
+    render json: {friends: current_user.friends }
+  end
+
+  def get_pending_friends
+    render json: {pending_friends: current_user.pending_friends}
+  end
+
+  def get_blocked_friends
+    render json: {blocked_friends: current_user.blocked_friends}
+  end
+
+  def get_requested_friends
+    render json: {requested_friends: current_user.requested_friends}
+  end
+
+  def send_friend_request
+    user_to_friend = User.find params[:id]
+
+    unless user_to_friend.nil?
+      current_user.friend_request(user_to_friend)
+    end
+  end
+
+  def block_user
+    user_to_block = User.find params[:id]
+
+    unless user_to_block.nil?
+      current_user.block_friend(user_to_block)
+    end
+  end
+
+  def unblock_user
+    user_to_block = User.find params[:id]
+
+    unless user_to_block.nil?
+      current_user.unblock_friend(user_to_block)
+    end
+  end
+
   def find_friends_algorithm
     locations = Location.near([current_user.location.latitude, current_user.location.longitude], 5)
     users_in_our_area = []

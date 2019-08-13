@@ -3,6 +3,5 @@
 class Activity < ApplicationRecord
   validates_uniqueness_of :name
 
-  acts_as_likeable
-  
+  acts_as_followable
 end

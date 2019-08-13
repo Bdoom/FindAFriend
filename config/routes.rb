@@ -18,6 +18,25 @@ Rails.application.routes.draw do
     end 
   end
 
+  resources :find_a_friend, only: [] do
+    collection do
+        get 'get_friends_list'
+        get 'get_pending_friends'
+        get 'get_blocked_friends'
+        get 'get_requested_friends'
+
+        patch 'send_friend_request'
+        put 'send_friend_request'
+
+        put 'block_user'
+        patch 'block_user'
+
+        put 'unblock_user'
+        patch 'unblock_user'
+
+    end
+  end
+
   get 'api/status', controller: 'api', action: 'status'
 
   root 'home#index'
