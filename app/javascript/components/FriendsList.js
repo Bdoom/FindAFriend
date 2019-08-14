@@ -45,9 +45,16 @@ class FriendsList extends React.Component {
   }
 
   render () {
+
+    var friends_list = this.state.friends.map((friend, index) => {
+      return (
+        <div key={index}><a className="list-group-item list-group-item-action" id={activity.id} href="#">{activity.name}</a></div>
+      );
+    }); 
+
     return (
       <React.Fragment>
-
+          
       </React.Fragment>
     );
   }

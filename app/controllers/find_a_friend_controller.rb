@@ -24,11 +24,22 @@ class FindAFriendController < ApplicationController
     render json: {requested_friends: current_user.requested_friends}
   end
 
+  def find_friends
+    render json: {potential_friends: find_friends_algorithm }, except: [:email]
+  end
+
   def send_friend_request
     user_to_friend = User.find params[:id]
 
     unless user_to_friend.nil?
-      current_user.friend_request(user_to_friend)
+      unless user_to_friend.id == current_user.id
+        unless current_user.pending_friends.include? user_to_friend
+          current_user.friend_request(user_to_friend)
+          render json: { data: 'ok' }
+        end
+      end
+    else
+      render json: {data: 'failed' }
     end
   end
 
@@ -84,7 +95,11 @@ class FindAFriendController < ApplicationController
       
       other_users_liked_activities.each do | activity_name |
         if our_activities_string.include? activity_name
-            potential_friends.push(user)
+          unless user.id == current_user.id
+            unless current_user.pending_friends.include? user
+              potential_friends.push(user)
+            end
+          end
         end
       end
     end

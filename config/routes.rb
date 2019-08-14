@@ -34,6 +34,8 @@ Rails.application.routes.draw do
         put 'unblock_user'
         patch 'unblock_user'
 
+        get 'find_friends'
+
     end
   end
 
