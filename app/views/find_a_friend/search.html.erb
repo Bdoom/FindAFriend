@@ -26,41 +26,24 @@ td {
 
 
 <script type="text/javascript">
-//$(document).ready(function () {
-//  $('#friendo-datatable').DataTable({
-//    "paging": true // false to disable pagination (or any other option)
-//  });
-//});
 
 window.setup_datatable = function setup_datatable()
 {
-  $('#friendo-datatable').DataTable({
-    "paging": true // false to disable pagination (or any other option)
-  });
+  var table = $('#friendo-datatable').DataTable();
+
+    //{
+    //  "paging": true,
+    //  "language": {
+    //    "emptyTable": "No friends available."
+   //   }
+   // });
+
 }
 
 function sendMessage()
 {
     var data = { message: 'i like chicken', author: 'daniel' };
     sendData(data);
-}
-
-function send_friend_request(e)
-{
-    //var id = e.target.id;
-    
-
-   axios({
-      method: 'PUT', 
-      url: '/find_a_friend/send_friend_request',
-      data: { id: id },
-      headers: {
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then((response) => {
-      console.log(response.data);
-    });
 }
 
 </script>

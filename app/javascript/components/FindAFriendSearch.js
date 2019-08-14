@@ -97,6 +97,8 @@ class FindAFriendSearch extends React.Component {
     { potential_friends_list }        
 </tbody>
 </table>
+
+      <button className="btn btn-primary" onClick={this.loadData}>Refresh</button>
       </React.Fragment>
     );
   }
