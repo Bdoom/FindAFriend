@@ -16,6 +16,11 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>
+      <% if user_signed_in? %>
+        <br />
+        <h2> Friends List </h2>
+        <%= react_component("FriendsList") %>
+      <% end %>
     </div>
   </body>
 </html>

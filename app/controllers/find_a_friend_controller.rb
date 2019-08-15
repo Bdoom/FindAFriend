@@ -9,23 +9,27 @@ class FindAFriendController < ApplicationController
   end
 
   def get_friends_list
-    render json: {friends: current_user.friends }
+    render json: {friends: current_user.friends}, except: [:email]
   end
 
   def get_pending_friends
-    render json: {pending_friends: current_user.pending_friends}
+    render json: {pending_friends: current_user.pending_friends}, except: [:email]
   end
 
   def get_blocked_friends
-    render json: {blocked_friends: current_user.blocked_friends}
+    render json: {blocked_friends: current_user.blocked_friends}, except: [:email]
   end
 
   def get_requested_friends
-    render json: {requested_friends: current_user.requested_friends}
+    render json: {requested_friends: current_user.requested_friends}, except: [:email]
   end
 
   def find_friends
     render json: {potential_friends: find_friends_algorithm }, except: [:email]
+  end
+
+  def get_entire_friends_list
+    render json: {friends: current_user.friends, pending_friends: current_user.pending_friends, blocked_friends: current_user.blocked_friends}, except: [:email]
   end
 
   def send_friend_request
@@ -96,8 +100,10 @@ class FindAFriendController < ApplicationController
       other_users_liked_activities.each do | activity_name |
         if our_activities_string.include? activity_name
           unless user.id == current_user.id
-            unless current_user.pending_friends.include? user
-              potential_friends.push(user)
+            unless current_user.friends_with?(user)
+              unless current_user.pending_friends.include? user
+                potential_friends.push(user)
+              end
             end
           end
         end
