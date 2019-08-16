@@ -160,6 +160,7 @@ class FriendsList extends React.Component {
     id = id.replace('current_friend_', '');
 
     // chat room code, still need to be developed. 
+    chatChannel.send({test: 'test'});
   }
 
   render () {

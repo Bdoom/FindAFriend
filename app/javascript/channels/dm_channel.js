@@ -1,6 +1,6 @@
 import consumer from "./consumer"
  
-const chatChannel = consumer.subscriptions.create({ channel: "HelloWorldChannel", room: "test" }, {
+window.chatChannel = consumer.subscriptions.create({ channel: "DmChannel", room: "test" }, {
     received(data) {
       console.log(data);
 
@@ -10,7 +10,8 @@ const chatChannel = consumer.subscriptions.create({ channel: "HelloWorldChannel"
     {
     }
 })
-   
+
+
 window.sendData = function sendData(data)
 {
     // example data: { sent_by: "Paul", body: "This is a cool chat app." }
