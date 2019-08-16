@@ -28,14 +28,20 @@ Rails.application.routes.draw do
         patch 'send_friend_request'
         put 'send_friend_request'
 
-        put 'block_user'
-        patch 'block_user'
+        put 'block_friend'
+        patch 'block_friend'
 
-        put 'unblock_user'
-        patch 'unblock_user'
+        put 'unblock_friend'
+        patch 'unblock_friend'
 
         get 'find_friends'
         get 'get_entire_friends_list'
+
+        put 'remove_friend'
+        patch 'remove_friend'
+
+        put 'accept_friend_request'
+        patch 'accept_friend_request'
 
     end
   end

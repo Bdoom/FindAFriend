@@ -29,7 +29,21 @@ class FindAFriendController < ApplicationController
   end
 
   def get_entire_friends_list
-    render json: {friends: current_user.friends, pending_friends: current_user.pending_friends, blocked_friends: current_user.blocked_friends}, except: [:email]
+    render json: {friends: current_user.friends, pending_friends: current_user.pending_friends, blocked_friends: current_user.blocked_friends, requested_friends: current_user.requested_friends}, except: [:email]
+  end
+
+  def remove_friend
+    other_user = User.find params[:id]
+    if other_user != nil
+      current_user.remove_friend(other_user)
+    end
+  end
+
+  def accept_friend_request
+    other_user = User.find params[:id]
+    if other_user != nil
+      current_user.accept_request(other_user)
+    end
   end
 
   def send_friend_request
@@ -47,7 +61,7 @@ class FindAFriendController < ApplicationController
     end
   end
 
-  def block_user
+  def block_friend
     user_to_block = User.find params[:id]
 
     unless user_to_block.nil?
@@ -55,7 +69,7 @@ class FindAFriendController < ApplicationController
     end
   end
 
-  def unblock_user
+  def unblock_friend
     user_to_block = User.find params[:id]
 
     unless user_to_block.nil?
