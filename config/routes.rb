@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+  resources :messages
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', confirmations: 'users/confirmations', passwords: 'users/passwords', unlocks: 'users/unlocks' }
   
   get '/findafriend', to: 'find_a_friend#search', as: 'findafriend'

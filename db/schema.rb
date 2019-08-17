@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_183502) do
+ActiveRecord::Schema.define(version: 2019_08_16_191441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 2019_08_13_183502) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "author_id"
+    t.bigint "sent_to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["sent_to_id"], name: "index_messages_on_sent_to_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,5 +131,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_183502) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "users"
+  add_foreign_key "messages", "users", column: "author_id"
+  add_foreign_key "messages", "users", column: "sent_to_id"
   add_foreign_key "users", "locations", on_delete: :cascade
 end
