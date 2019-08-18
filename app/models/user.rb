@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
 
   validates :invite_code, presence: true
-  
+
   has_friendship
   acts_as_follower
 
@@ -23,10 +23,10 @@ class User < ApplicationRecord
   validate :validate_age
 
   private
-  def validate_age
-      if birthdate.present? && birthdate > 18.years.ago
-          errors.add(:birthdate, 'You should be over 18 years old.')
-      end
-  end
 
+  def validate_age
+    if birthdate.present? && birthdate > 18.years.ago
+      errors.add(:birthdate, 'You should be over 18 years old.')
+    end
+  end
 end

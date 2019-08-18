@@ -161,6 +161,8 @@ class FriendsList extends React.Component {
 
     // chat room code, still need to be developed. 
     //chatChannel.send({test: 'test'});
+    console.log('open chat window.');
+    createRoomConnection()
   }
 
   render () {
