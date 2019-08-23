@@ -163,6 +163,7 @@ class FriendsList extends React.Component {
     //chatChannel.send({test: 'test'});
     console.log('open chat window.');
     createRoomConnection()
+    
   }
 
   render () {

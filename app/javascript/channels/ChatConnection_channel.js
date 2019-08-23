@@ -1,6 +1,6 @@
 import consumer from "./consumer"
  
-window.open_chat_channel = consumer.subscriptions.create({ channel: "DmChannel", room: "test" }, {
+window.open_chat_channel = consumer.subscriptions.create({ channel: "RoomChannel", room: "test" }, {
 
   // can call any ruby channel method using: this.perform(method_name, {params})
   initialized()
@@ -15,7 +15,7 @@ window.open_chat_channel = consumer.subscriptions.create({ channel: "DmChannel",
 
   connected()
   {
-
+    console.log('connected.');
   },
 
   disconnected()

@@ -55,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     resource.location_id = @location.id
 
-    resource.save!
+    resource.save(validate: false)
 
     inv = InviteCode.find_by(invite_code: resource.invite_code)
     inv.used = true

@@ -46,7 +46,6 @@ require( 'datatables.net-scroller-bs4' )
 require( 'datatables.net-select-bs4' )
 
 require('ws')
-require('channels/ChatConnection')
 
 import '../stylesheets/application'
 
