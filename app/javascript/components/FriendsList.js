@@ -156,14 +156,13 @@ class FriendsList extends React.Component {
 
   open_chat(e)
   {
-    var id = e.target.id;
-    id = id.replace('current_friend_', '');
+    var recipient_id = e.target.id;
+    recipient_id = recipient_id.replace('current_friend_', '');
 
     // chat room code, still need to be developed. 
     //chatChannel.send({test: 'test'});
-    console.log('open chat window.');
-    createRoomConnection()
-    
+    var sender_id = "1";
+    window.location = "/conversations/new?sender=" + sender_id + "&recipient=" + recipient_id;
   }
 
   render () {
