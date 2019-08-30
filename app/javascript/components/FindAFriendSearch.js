@@ -23,7 +23,7 @@ class FindAFriendSearch extends React.Component {
   
   add_friend(e)
   {
-    var id = e.target.id;
+   var id = e.target.id;
     
    axios({
     method: 'PUT', 
@@ -64,7 +64,7 @@ class FindAFriendSearch extends React.Component {
     var potential_friends_list = potential_friends_jsonArray.map((friendo, index) => {
       return (
         <tr key={index}>
-          <td>{friendo.first_name + ' ' + friendo.last_name}</td>
+          <td><a href="/users/{friendo.id}">{friendo.first_name + ' ' + friendo.last_name}</a></td>
           <td>{friendo.about_me}</td>
           <td>{friendo.gender}</td>
           <td>{friendo.sexuality}</td>

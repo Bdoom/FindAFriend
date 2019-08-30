@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+
+
+<!-- <div class="border" style="line-height:3em;overflow:scroll;padding:15px;">
+<%= form_with(url: "/conversations/create_new_message", method: "post") do %>
+  <%= text_area_tag :message_body, '', style: 'width:100%' %>
+  <%= hidden_field_tag 'conversation_id', @conversation.id %>
+  <%= submit_tag("Send Message", data: {disable_with: 'Sending message...'}) %>
+<% end %>
+</div> -->
+
+<%= react_component("Conversation", { conversation_id: @conversation.id.to_s }) %>
+
 
 <%= link_to 'Edit', edit_conversation_path(@conversation) %> |
 <%= link_to 'Back', conversations_path %>

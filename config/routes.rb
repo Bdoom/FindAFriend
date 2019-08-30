@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  resources :conversations
+  resources :conversations do
+    collection do
+      post 'create_new_message'
+      get 'get_recent_messages'
+    end
+  end
 
   resources :messages
-  
+  resources :users, only: [:show]
+
   devise_for :users, controllers:
   {
     sessions: 'users/sessions',

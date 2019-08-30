@@ -3,6 +3,34 @@
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[show edit update destroy]
 
+  def create_new_message
+    convo = Conversation.find params[:conversation_id]
+
+    if convo.sender_id == current_user.id || convo.recipient_id == current_user.id
+      message_body = params[:message_body]
+      message = Message.create!(user: current_user, conversation_id: convo.id, message_body: message_body)
+
+      convo.messages << message unless message.nil?
+
+      render json: { status: 'ok' }
+    else
+      render json: { status: 'fail' }
+    end
+  end
+
+  def get_recent_messages
+    convo = Conversation.find params[:conversation_id]
+    @messages = nil
+
+    redirect_to root_path unless user_signed_in?
+
+    if convo.sender_id == current_user.id || convo.recipient_id == current_user.id
+      @messages = convo.messages.last(10)
+    end
+
+    render json: { messages: @messages }
+  end
+
   # GET /conversations
   # GET /conversations.json
   def index
@@ -11,7 +39,10 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/1
   # GET /conversations/1.json
-  def show; end
+  def show
+    @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages
+  end
 
   # GET /conversations/new
   def new

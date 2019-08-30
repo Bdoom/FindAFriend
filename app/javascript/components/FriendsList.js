@@ -156,13 +156,10 @@ class FriendsList extends React.Component {
 
   open_chat(e)
   {
-    var recipient_id = e.target.id;
-    recipient_id = recipient_id.replace('current_friend_', '');
-
     // chat room code, still need to be developed. 
     //chatChannel.send({test: 'test'});
 
-    window.location = "/conversations/open_conversation?recipient=" + recipient_id;
+    window.location = "/conversations";
   }
 
   render () {
@@ -194,7 +191,7 @@ class FriendsList extends React.Component {
             <button className="dropdown-item" onClick={this.block_friend} id={"block_friend_id_" + friend.id}>Block Friend</button>
           </div>
 
-          <button className="list-group-item list-group-item-action" onClick={this.open_chat} id={"current_friend_" + friend.id}>{friend.first_name}</button>
+          <button className="list-group-item list-group-item-action" onClick={this.open_chat}>{friend.first_name}</button>
         </div>
 
       );

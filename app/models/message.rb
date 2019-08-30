@@ -6,5 +6,4 @@ class Message < ApplicationRecord
   
   validates_presence_of :message_body, :conversation_id, :user_id
 
-  after_create_commit { MessageBroadcastJob.perform_later(self) }
 end

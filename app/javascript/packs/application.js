@@ -16,15 +16,12 @@
 // const imagePath = (name) => images(name, true)
 
 // Support component names relative to this directory:
-var componentRequireContext = require.context("components", true);
-
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("bootstrap/dist/js/bootstrap")
-
 
 require( 'jszip' )
 require( 'pdfmake' )
