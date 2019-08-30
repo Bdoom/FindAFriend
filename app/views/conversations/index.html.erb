@@ -1,3 +1,7 @@
+<% if @conversations.count == 0 %>
+    <%= link_to 'Start New Conversation', new_conversation_path %>
+<% end %>
+
 <% @conversations.each do |convo| %>
-    <%= link_to  convo.recipient.first_name, convo %>
+    <%= link_to convo.recipient.first_name, convo %>
 <% end %>

@@ -20,12 +20,13 @@ setup_chat_connection()
     received(data)
     {
         var message_body = data.message_body;
+        var first_name = data.first_name;
 
         var node = document.createElement("div");
         node.setAttribute('class', 'bg-light');
 
         var span_user_name = document.createElement("span");
-        span_user_name.textContent = 'unknown name: ';
+        span_user_name.textContent = first_name + ':';
         span_user_name.setAttribute('class', 'text-primary');
         node.appendChild(span_user_name);
 
@@ -115,7 +116,8 @@ setup_chat_connection()
       if (this._isMounted) {
         if (response.data.status == "ok")
         {
-          this.chatConnection.send({message_body: message_body, conversation_id: conversation_id})
+          var first_name = document.getElementById('first_name').value;
+          this.chatConnection.send({first_name: first_name, message_body: message_body, conversation_id: conversation_id})
           var body = document.getElementById('message_body');
           body.value = "";
         }
@@ -149,6 +151,7 @@ setup_chat_connection()
 <div className="scrollbox border">
   <textarea name="message_body" id="message_body" className="width-100-percent" onKeyDown={this.handle_key_down}></textarea>
   <input type="hidden" name="conversation_id" id="conversation_id" value={this.props.conversation_id}></input>
+  <input type="hidden" name="first_name" id="first_name" value={this.props.first_name} ></input>
 </div>
 
       </React.Fragment>

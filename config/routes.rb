@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :conversations do
+  resources :conversations, except: [:edit] do
     collection do
       post 'create_new_message'
       get 'get_recent_messages'

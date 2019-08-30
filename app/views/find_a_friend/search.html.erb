@@ -1,20 +1,3 @@
-<ul class="nav nav-pills">
-<li class="nav-item">
-<%= link_to 'Home', root_path, class: 'nav-link' %>
-</li>
-<li class="nav-item">
-<%= link_to 'Find a Friend', findafriend_path, class: 'nav-link' %>
-</li>
-<li class="nav-item">
-<%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'%>
-</li>
-<li class="nav-item">
-<%= link_to 'Edit User Details', edit_user_registration_path(current_user), class: 'nav-link'%>
-</li>
-
-<span> add link to 1 on 1 chats and chat rooms </span>
-</ul>
-
 <style>
 td {
   word-break: break-all;
@@ -30,14 +13,6 @@ td {
 window.setup_datatable = function setup_datatable()
 {
   var table = $('#friendo-datatable').DataTable();
-
-    //{
-    //  "paging": true,
-    //  "language": {
-    //    "emptyTable": "No friends available."
-   //   }
-   // });
-
 }
 
 function sendMessage()
@@ -47,5 +22,3 @@ function sendMessage()
 }
 
 </script>
-
-<!-- <button onclick="sendMessage()">Click me</button> -->
