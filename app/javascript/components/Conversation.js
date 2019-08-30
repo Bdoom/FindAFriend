@@ -12,8 +12,6 @@ setup_chat_connection()
 {
   var conversation_id = this.props.conversation_id
 
-
-
   this.chatConnection = consumer.subscriptions.create({ channel: "ConversationChannel", conversation_id: conversation_id }, {
 
     // can call any ruby channel method using: this.perform(method_name, {params})
@@ -104,10 +102,12 @@ setup_chat_connection()
     var message_body = document.getElementById('message_body').value;
     var conversation_id = this.props.conversation_id;
 
+    var first_name = this.props.first_name;
+
     axios({
       method: 'POST', 
       url: '/conversations/create_new_message',
-      params: { conversation_id: conversation_id, message_body: message_body },
+      data: { conversation_id: conversation_id, message_body: message_body, first_name: first_name },
       headers: {
         'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
       }
@@ -116,7 +116,7 @@ setup_chat_connection()
       if (this._isMounted) {
         if (response.data.status == "ok")
         {
-          var first_name = document.getElementById('first_name').value;
+          var first_name =  this.props.first_name;
           this.chatConnection.send({first_name: first_name, message_body: message_body, conversation_id: conversation_id})
           var body = document.getElementById('message_body');
           body.value = "";
@@ -130,7 +130,7 @@ setup_chat_connection()
     var messages = this.state.messages.map((message, index) => {
       return (
         <div key={index} className="bg-light">
-        <span className="text-primary">unknown username:</span>
+        <span className="text-primary">{message.first_name}:</span>
         <span className="text-secondary"> { message.message_body }</span>
         <br />
         </div>
@@ -150,8 +150,6 @@ setup_chat_connection()
 
 <div className="scrollbox border">
   <textarea name="message_body" id="message_body" className="width-100-percent" onKeyDown={this.handle_key_down}></textarea>
-  <input type="hidden" name="conversation_id" id="conversation_id" value={this.props.conversation_id}></input>
-  <input type="hidden" name="first_name" id="first_name" value={this.props.first_name} ></input>
 </div>
 
       </React.Fragment>

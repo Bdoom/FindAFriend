@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_friendship
   acts_as_follower
+  has_and_belongs_to_many :conversations
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -24,7 +25,7 @@ class User < ApplicationRecord
     non_binary: 'Non-Binary'
   }
 
-  enum sexuality: 
+  enum sexuality:
   {
     heterosexual: 'Heterosexual',
     homosexual: 'Homosexual',

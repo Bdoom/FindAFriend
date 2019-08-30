@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   end
 
   resources :messages
-  resources :users, only: [:show]
-
   devise_for :users, controllers:
   {
     sessions: 'users/sessions',

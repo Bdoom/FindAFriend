@@ -6,9 +6,9 @@ class ConversationsController < ApplicationController
   def create_new_message
     convo = Conversation.find params[:conversation_id]
 
-    if convo.sender_id == current_user.id || convo.recipient_id == current_user.id
+    if convo.users.include? current_user
       message_body = params[:message_body]
-      message = Message.create!(user: current_user, conversation_id: convo.id, message_body: message_body)
+      message = Message.create!(first_name: params[:first_name], user: current_user, conversation_id: convo.id, message_body: message_body)
 
       convo.messages << message unless message.nil?
 
@@ -20,13 +20,10 @@ class ConversationsController < ApplicationController
 
   def get_recent_messages
     convo = Conversation.find params[:conversation_id]
-    @messages = nil
 
     redirect_to root_path unless user_signed_in?
 
-    if convo.sender_id == current_user.id || convo.recipient_id == current_user.id
-      @messages = convo.messages.last(10)
-    end
+    @messages = convo.messages.last(10) if convo.users.include? current_user
 
     render json: { messages: @messages }
   end
@@ -34,7 +31,7 @@ class ConversationsController < ApplicationController
   # GET /conversations
   # GET /conversations.json
   def index
-    @conversations = Conversation.where(sender: current_user.id) + Conversation.where(recipient: current_user.id)
+    @conversations = current_user.conversations
   end
 
   # GET /conversations/1
@@ -55,10 +52,15 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
-    @conversation = Conversation.new(conversation_params)
+    @conversation = Conversation.new
 
     respond_to do |format|
       if @conversation.save
+
+        recipient_user = User.find conversation_params[:recipient_id]
+        @conversation.users << current_user unless current_user.nil?
+        @conversation.users << recipient_user unless recipient_user.nil?
+
         format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
         format.json { render :show, status: :created, location: @conversation }
       else
