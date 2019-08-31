@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'create_new_message'
       get 'get_recent_messages'
       get 'show_chat_rooms'
+      get 'get_users_in_conversation'
     end
   end
 

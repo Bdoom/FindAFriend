@@ -16,7 +16,6 @@ class ConversationsController < ApplicationController
 
   def create_new_message
     convo = Conversation.find params[:conversation_id]
-    puts "convo: #{convo.topic}"
 
     if convo.users.include? current_user
       message_body = params[:message_body]
@@ -32,16 +31,26 @@ class ConversationsController < ApplicationController
 
   def get_recent_messages
     convo = Conversation.find params[:conversation_id]
-
-    redirect_to root_path unless user_signed_in?
+    @messages = nil
 
     if convo.users.include? current_user
-      @messages = convo.messages.last(10)
+      @messages = convo.messages.last(50)
     elsif !convo.topic.nil?
-      @messages = convo.messages.last(10)
+      @messages = convo.messages.last(50)
     end
 
     render json: { messages: @messages }
+  end
+
+  def get_users_in_conversation
+    convo = Conversation.find params[:conversation_id]
+    @users = nil
+
+    if convo.users.include? current_user
+        @users = convo.users
+    end
+
+    render json: { users: @users }, except: [:email, :invite_code]
   end
 
   # GET /conversations
