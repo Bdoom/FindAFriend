@@ -1,1 +1,5 @@
-<%= react_component("Conversation", { conversation_id: @conversation.id.to_s, first_name: current_user.first_name}) %>
+<% if @conversation.topic != nil %>
+<h1 class="text-center"><%= @conversation.topic %></h1>
+<% end %>
+
+<%= react_component("Conversation", {user_id: current_user.id, conversation_id: @conversation.id.to_s, first_name: current_user.first_name}) %>

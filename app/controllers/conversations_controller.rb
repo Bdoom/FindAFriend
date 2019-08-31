@@ -2,9 +2,21 @@
 
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[show edit update destroy]
+  before_action :logged_in?
+
+  def logged_in?
+    unless user_signed_in?
+      redirect_to root_path, notice: 'You must be logged in to view this page.'
+    end
+  end
+
+  def show_chat_rooms
+    render 'conversations/chatrooms'
+  end
 
   def create_new_message
     convo = Conversation.find params[:conversation_id]
+    puts "convo: #{convo.topic}"
 
     if convo.users.include? current_user
       message_body = params[:message_body]
@@ -23,7 +35,11 @@ class ConversationsController < ApplicationController
 
     redirect_to root_path unless user_signed_in?
 
-    @messages = convo.messages.last(10) if convo.users.include? current_user
+    if convo.users.include? current_user
+      @messages = convo.messages.last(10)
+    elsif !convo.topic.nil?
+      @messages = convo.messages.last(10)
+    end
 
     render json: { messages: @messages }
   end

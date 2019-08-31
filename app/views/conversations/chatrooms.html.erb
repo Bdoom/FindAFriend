@@ -1,0 +1,5 @@
+<% CS.states(:us).each do |k,v| %>
+    <% convo = Conversation.find_by(topic: k) %>
+    <%= link_to v, convo %>
+    <br />
+<% end %>

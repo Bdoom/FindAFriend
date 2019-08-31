@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_211330) do
+ActiveRecord::Schema.define(version: 2019_08_31_010028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_211330) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "topic"
   end
 
   create_table "conversations_users", id: false, force: :cascade do |t|
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_211330) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "invite_code"
+    t.string "status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
