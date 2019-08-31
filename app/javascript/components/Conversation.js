@@ -27,7 +27,7 @@ setup_chat_connection()
             node.setAttribute('class', 'bg-light');
 
             var user_name_link = document.createElement("a");
-            user_name_link.textContent = first_name + ':';
+            user_name_link.textContent = first_name + ': ';
             user_name_link.setAttribute('class', 'text-primary');
             user_name_link.setAttribute('href', user_profile_path + user_id);
             node.appendChild(user_name_link);
@@ -155,7 +155,7 @@ setup_chat_connection()
       var messages = this.state.messages.map((message, index) => {
         return (
           <div key={index} className="bg-light">
-          <a className="text-primary" href={this.props.user_profile_path + message.user_id}>{message.first_name}:</a>
+          <a className="text-primary" href={this.props.user_profile_path + message.user_id}>{message.first_name}: </a>
           <span className="text-secondary"> { message.message_body }</span>
           <br />
           </div>
@@ -193,8 +193,6 @@ setup_chat_connection()
       </div>    
     </div>
 </div>
-
-
 
 
   <div className="scrollbox border">

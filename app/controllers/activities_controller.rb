@@ -1,5 +1,7 @@
 class ActivitiesController < ApplicationController
 
+    before_action :authenticate_user!
+
     def add_activity_to_user
         if current_user != nil
             activity = Activity.find params[:id]

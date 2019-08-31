@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FindAFriendController < ApplicationController
+  before_action :logged_in?
+
   def search
     @potential_friends = find_friends_algorithm
 

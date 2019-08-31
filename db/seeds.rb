@@ -30,10 +30,13 @@ invite_codes.each do |invite_code|
   InviteCode.find_or_create_by!(invite_code)
 end
 
-CS.update
-
 CS.states(:us).each do |key, _value|
   convo = Conversation.new
   convo.topic = key
   convo.save
 end
+
+invite = InviteCode.first.invite_code
+invite2 = InviteCode.last.invite_code
+User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', invite_code: invite, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development? 
+User.create!(email: 'bdoom@playveritex.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', invite_code: invite2, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development?
