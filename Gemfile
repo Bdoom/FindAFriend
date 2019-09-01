@@ -46,8 +46,10 @@ gem 'webpacker'
 gem 'react-rails'
 gem 'devise'
 gem 'ransack'
+
 gem 'has_friendship'
-gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'socialization'
+
 gem 'city-state'
 
 group :development, :test do

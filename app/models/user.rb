@@ -7,7 +7,11 @@ class User < ApplicationRecord
 
   has_friendship
   acts_as_follower
+  acts_as_liker
+  
   has_and_belongs_to_many :conversations
+
+  has_many :posts
 
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
