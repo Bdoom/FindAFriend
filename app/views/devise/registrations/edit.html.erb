@@ -72,6 +72,23 @@
     <%= f.label :can_submit, 'You require 150 characters to submit.', id: 'can_submit' %>
   </div>
   
+  <div class="form-group">
+    Profile Viewability Level <br />
+
+    <% User.viewability_levels.map.each do |key, value| %>
+      <%= f.radio_button :profile_viewability_level, value %>
+      <%= f.label key %> <br />
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    Post Default Viewability Level <br />
+
+    <% User.viewability_levels.map.each do |key, value| %>
+      <%= f.radio_button :post_default_viewability_level, value %>
+      <%= f.label key %> <br />
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Update", class: 'btn btn-primary' %>

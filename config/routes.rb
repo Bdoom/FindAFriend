@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :messages
-  devise_for :users, controllers:
+
+  resources :users, only: [:show]
+  devise_for :users, path_prefix: 'd', controllers:
   {
     sessions: 'users/sessions',
     registrations: 'users/registrations',

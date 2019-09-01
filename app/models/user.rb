@@ -62,6 +62,13 @@ class User < ApplicationRecord
     native_hawaiian_or_other_pacific_islander: 'Native Hawaiian or Other Pacific Islander'
   }
 
+  enum viewability_level:
+  {
+    everyone: 0,
+    only_me: 1,
+    friends_only: 2
+  }
+
   validate :validate_age
 
   private

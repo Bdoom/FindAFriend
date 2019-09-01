@@ -4,6 +4,9 @@
 <%= link_to 'Home', root_path, class: 'nav-link' %>
 </li>
 <li class="nav-item">
+<%= link_to 'Profile', user_path(current_user), class: 'nav-link' %>
+</li>
+<li class="nav-item">
 <%= link_to 'Find a Friend', findafriend_path, class: 'nav-link' %>
 </li>
 <li class="nav-item">
