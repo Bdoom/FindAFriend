@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   end
 
   resources :messages
+  
+  resources :posts do
+    collection do
+      get 'get_recent_posts'
+    end
+  end
 
   resources :users, only: [:show]
   devise_for :users, path_prefix: 'd', controllers:

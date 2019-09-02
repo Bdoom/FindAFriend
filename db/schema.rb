@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_164117) do
+ActiveRecord::Schema.define(version: 2019_09_01_173621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_164117) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "post_visibility"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -164,7 +165,6 @@ ActiveRecord::Schema.define(version: 2019_09_01_164117) do
     t.string "invite_code"
     t.string "status"
     t.integer "profile_viewability_level", default: 0
-    t.integer "post_default_viewability_level", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

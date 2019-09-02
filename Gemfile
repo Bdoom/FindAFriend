@@ -50,6 +50,8 @@ gem 'ransack'
 gem 'has_friendship'
 gem 'socialization'
 
+gem 'will_paginate', '~> 3.1.0'
+
 gem 'city-state'
 
 group :development, :test do

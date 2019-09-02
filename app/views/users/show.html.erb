@@ -7,7 +7,15 @@
         </p>
     </div>
     <div class="col">
-        Post to Profile Form
+    <% if current_user == @user %>
+        <%= form_with model: @post, id: 'post_form' do |f| %>
+            <div class="form-group">
+            <%= f.text_area :body, class: 'form-control', id: 'message_body' %>
+            <%= f.select :post_visibility, options_for_select(User.viewability_levels.map {|k,v| [k.humanize.capitalize, v]}) %>
+            <%= f.submit "Post", class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+    <% end %>
     </div>
 </div>
 
@@ -15,5 +23,46 @@
     <div class="col"></div>
     <div class="col">
         Posts from Friends and ourselves
+        <%= react_component("Profile", { user_id: @user.id }) %>
     </div>
 </div>
+
+<script type="text/javascript">
+
+$(document).ready(function ()
+{
+    $("#post_form").bind("ajax:complete", function(event,xhr,status) {
+        var value = $('#message_body').val();
+        if (value == "" || value == undefined)
+        {
+            return;
+        }
+
+        $('#message_body').val('');
+
+        var li = document.createElement("li");
+        li.setAttribute('class', 'list-group-item');
+
+        var article = document.createElement("article");
+        article.setAttribute('class', 'card');
+        li.appendChild(article);
+
+        var span_message_body = document.createElement("span");
+        span_message_body.textContent = value;
+        span_message_body.setAttribute('class', 'card-body');
+        article.appendChild(span_message_body);
+
+        var div_date = document.createElement("div");
+        var date = new Date();
+        var date = "Posted: " + Number(date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
+        div_date.textContent = date;
+        span_message_body.prepend(div_date);
+
+        var element = document.getElementById("profile_posts_list");
+        element.prepend(li);
+
+    });
+
+});
+
+</script>

@@ -3,7 +3,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find params[:id]
-
+    @post = Post.new
+    
     if @user != current_user
 
       if @user.profile_viewability_level == User.viewability_levels[:friends_only]
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
       elsif @user.profile_viewability_level == User.viewability_levels[:only_me]
         redirect_to root_path, notice: 'You are not friends with this user, or their profile is set to private.'
       end
-
     end
   end
+
 end

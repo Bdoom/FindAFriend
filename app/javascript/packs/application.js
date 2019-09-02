@@ -42,8 +42,6 @@ require( 'datatables.net-rowreorder-bs4' )
 require( 'datatables.net-scroller-bs4' )
 require( 'datatables.net-select-bs4' )
 
-require('ws')
-
 import '../stylesheets/application'
 
 // Support component names relative to this directory:

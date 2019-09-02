@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include FafEnums
+
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
 
   validates :invite_code, presence: true
@@ -64,13 +66,6 @@ class User < ApplicationRecord
     black_or_african_american: 'Black or African American',
     asian: 'Asian',
     native_hawaiian_or_other_pacific_islander: 'Native Hawaiian or Other Pacific Islander'
-  }
-
-  enum viewability_level:
-  {
-    everyone: 0,
-    only_me: 1,
-    friends_only: 2
   }
 
   validate :validate_age

@@ -38,5 +38,44 @@ end
 
 invite = InviteCode.first.invite_code
 invite2 = InviteCode.last.invite_code
-User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', invite_code: invite, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development? 
-User.create!(email: 'bdoom@playveritex.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', invite_code: invite2, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development?
+user1 = User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', invite_code: invite, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development?
+user2 = User.create!(email: 'bdoom@playveritex.com', first_name: 'Brian', last_name: 'Pie', password: 'travel', password_confirmation: 'travel', invite_code: invite2, about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39') if Rails.env.development?
+
+unless Rails.env.production?
+  @ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+end
+
+result = Geocoder.search(@ip)
+unless result.nil?
+  @location = Location.new
+  @location.latitude = result.first.latitude
+  @location.longitude = result.first.longitude
+  @location.country = result.first.country
+  @location.city = result.first.city
+  @location.state = result.first.region
+  @location.zipcode = result.first.postal
+  @location.user_id = user1.id
+  @location.save!
+  user1.location_id = @location.id
+  user1.save!
+end
+
+unless result.nil?
+  @location = Location.new
+  @location.latitude = result.first.latitude
+  @location.longitude = result.first.longitude
+  @location.country = result.first.country
+  @location.city = result.first.city
+  @location.state = result.first.region
+  @location.zipcode = result.first.postal
+  @location.user_id = user2.id
+  @location.save!
+  user2.location_id = @location.id
+  user2.save!
+end
+
+
+random_posts = (0...1000).map { { user: User.first, body: SecureRandom.hex(7), post_visibility: 0 } }
+random_posts.each do |post|
+Post.find_or_create_by!(post)
+end
