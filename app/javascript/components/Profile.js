@@ -5,7 +5,7 @@ import Post from './Post'
 
 class Profile extends React.Component {
   _isMounted = false;
-  page = 1;
+  page = 0;
 
   constructor(props)
   {

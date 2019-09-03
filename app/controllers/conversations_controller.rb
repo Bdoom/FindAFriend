@@ -32,14 +32,23 @@ class ConversationsController < ApplicationController
   def get_recent_messages
     convo = Conversation.find params[:conversation_id]
     @messages = nil
+    @page = params[:page].to_i
 
-    if convo.users.include? current_user
-      @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
-    elsif !convo.topic.nil?
-      @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
+    if @page * 50 > convo.messages.count 
+      @messages = convo.messages.order("created_at ASC").last(convo.messages.count)
+      render json: { messages: @messages }
+    else
+      if convo.users.include? current_user
+        #@messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
+        @messages = convo.messages.order("created_at ASC").last(50 * @page)
+
+      elsif !convo.topic.nil?
+        #@messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
+        @messages = convo.messages.order("created_at ASC").last(50 * @page)
+      end
+
+      render json: { messages: @messages }
     end
-
-    render json: { messages: @messages }
   end
 
   def get_users_in_conversation

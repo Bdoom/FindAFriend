@@ -7,7 +7,7 @@ import consumer from "../channels/consumer"
 class Conversation extends React.Component {
   _isMounted = false;
   chatConnection = null;
-  page = 0;
+  page = 1;
 
 setup_chat_connection()
 {
@@ -115,7 +115,7 @@ setup_chat_connection()
       .then((response) => {
         if (this._isMounted) {
           this.setState({
-            messages: [...response.data.messages, ...this.state.messages ] 
+            messages: response.data.messages 
           });
         }
     });
@@ -127,7 +127,7 @@ setup_chat_connection()
     axios({
         method: 'GET', 
         url: '/conversations/get_recent_messages',
-        params: { conversation_id: this.props.conversation_id },
+        params: { conversation_id: this.props.conversation_id, page: this.page },
         headers: {
           'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
         }
