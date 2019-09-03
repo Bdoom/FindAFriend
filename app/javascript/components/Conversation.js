@@ -7,6 +7,7 @@ import consumer from "../channels/consumer"
 class Conversation extends React.Component {
   _isMounted = false;
   chatConnection = null;
+  page = 0;
 
 setup_chat_connection()
 {
@@ -58,6 +59,7 @@ setup_chat_connection()
     this.send_message = this.send_message.bind(this);
     this.setup_chat_connection = this.setup_chat_connection.bind(this);
     this.handle_key_down = this.handle_key_down.bind(this);
+    this.trackScrolling = this.trackScrolling.bind(this);
 
     this.chatConnection = null;
 
@@ -70,15 +72,56 @@ setup_chat_connection()
 
   componentWillUnmount() {
     this._isMounted = false;
+    document.getElementById("scroll_element").removeEventListener('scroll', this.trackScrolling);
+
   }
   
 
   componentDidMount() {
     this._isMounted = true;
     this.loadData();
+    document.getElementById("scroll_element").addEventListener('scroll', this.trackScrolling);
+
     this.setup_chat_connection();
+
+    var scrollbox = document.getElementById("scroll_element");
+    scrollbox.scrollTop = scrollbox.scrollHeight;
+  }
+
+  componentDidUpdate()
+  {
+    var scrollbox = document.getElementById("scroll_element");
+    scrollbox.scrollTop = scrollbox.scrollHeight;
+
+    document.getElementById("scroll_element").addEventListener('scroll', this.trackScrolling);
   }
   
+  trackScrolling()
+  {
+    var scrollbox = document.getElementById("scroll_element");
+
+    if (scrollbox.scrollTop <= 30)
+    {
+      this.page++;
+
+      axios({
+        method: 'GET', 
+        url: '/conversations/get_recent_messages',
+        params: { conversation_id: this.props.conversation_id, page: this.page},
+        headers: {
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      })
+      .then((response) => {
+        if (this._isMounted) {
+          this.setState({
+            messages: [...response.data.messages, ...this.state.messages ] 
+          });
+        }
+    });
+    }
+  }
+
   loadData()
   {
     axios({
@@ -187,7 +230,7 @@ setup_chat_connection()
 
     <div className="col">
       <div className="card scrolling scrollbar-black" id="scroll_element">
-        <div className="card-body" id="message_box">
+        <div className="card-body"  id="message_box">
           { messages }
         </div>
       </div>    

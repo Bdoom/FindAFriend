@@ -34,9 +34,9 @@ class ConversationsController < ApplicationController
     @messages = nil
 
     if convo.users.include? current_user
-      @messages = convo.messages.last(50)
+      @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
     elsif !convo.topic.nil?
-      @messages = convo.messages.last(50)
+      @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
     end
 
     render json: { messages: @messages }

@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+
   def create
+
     @post = Post.new(sanitized_create_params)
 
     @post.user_id = current_user.id
 
-    if @post.save
-      render json: { status: 'ok' }
+    if verify_recaptcha(model: @post) && @post.save
+        render json: {status: 'ok'}, status: 201
     else
-      render json: { status: 'fail' }
+        render json: {status: 'fail'}, status: 400
     end
-  end
+
+end
 
   def get_recent_posts
     @user = User.find params[:user_id]

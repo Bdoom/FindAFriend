@@ -1,3 +1,10 @@
+<style>
+.hidden
+{
+    display: none;
+}
+</style>
+
 <div class="row">
     <div class="col">
         <p>
@@ -13,6 +20,8 @@
             <%= f.text_area :body, class: 'form-control', id: 'message_body' %>
             <%= f.select :post_visibility, options_for_select(User.viewability_levels.map {|k,v| [k.humanize.capitalize, v]}) %>
             <%= f.submit "Post", class: 'btn btn-primary' %>
+            <%= recaptcha_tags %>
+            <span id="captcha_error" style="color:red;" class="hidden">Please submit your captcha.</span>
             </div>
         <% end %>
     <% end %>
@@ -29,9 +38,20 @@
 
 <script type="text/javascript">
 
+
 $(document).ready(function ()
 {
-    $("#post_form").bind("ajax:complete", function(event,xhr,status) {
+
+    $("#post_form").bind('ajax:error', function(response, status, xhr) {
+        if (response.detail[0].status == "fail") {
+            $("#captcha_error").removeClass("hidden");
+        }
+    })
+
+    $("#post_form").bind("ajax:success", function(data, status, xhr) {
+
+        grecaptcha.reset();
+
         var value = $('#message_body').val();
         if (value == "" || value == undefined)
         {

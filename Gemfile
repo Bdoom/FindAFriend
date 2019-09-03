@@ -51,6 +51,7 @@ gem 'has_friendship'
 gem 'socialization'
 
 gem 'will_paginate', '~> 3.1.0'
+gem "recaptcha", require: "recaptcha/rails"
 
 gem 'city-state'
 

@@ -8,21 +8,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def validate_invite_code
     invite_code = params[:user][:invite_code]
-     
-    if invite_code != nil
-        validInviteCode = InviteCode.find_by(invite_code: invite_code) != nil
-        if !validInviteCode
-          redirect_to root_path, notice: 'Invite code is not valid.'
-        end
 
-        if validInviteCode
-          invite = InviteCode.find_by(invite_code: invite_code)
-          if invite.used
-            redirect_to root_path, notice: 'Invite code has been used.'
-          end
-        end
-      else
+    if !invite_code.nil?
+      validInviteCode = InviteCode.find_by(invite_code: invite_code) != nil
+      unless validInviteCode
         redirect_to root_path, notice: 'Invite code is not valid.'
+      end
+
+      if validInviteCode
+        invite = InviteCode.find_by(invite_code: invite_code)
+        if invite.used
+          redirect_to root_path, notice: 'Invite code has been used.'
+        end
+      end
+    else
+      redirect_to root_path, notice: 'Invite code is not valid.'
     end
   end
 
@@ -42,24 +42,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     result = Geocoder.search(@ip)
-    if result != nil    
-    @location = Location.new
-    @location.latitude = result.first.latitude
-    @location.longitude = result.first.longitude
-    @location.country = result.first.country
-    @location.city = result.first.city
-    @location.state = result.first.region
-    @location.zipcode = result.first.postal
-    @location.user_id = resource.id
-    @location.save!
+    unless result.nil?
+      @location = Location.new
+      @location.latitude = result.first.latitude
+      @location.longitude = result.first.longitude
+      @location.country = result.first.country
+      @location.city = result.first.city
+      @location.state = result.first.region
+      @location.zipcode = result.first.postal
+      @location.user_id = resource.id
+      @location.save!
 
-    resource.location_id = @location.id
+      resource.location_id = @location.id
 
-    resource.save(validate: false)
+      resource.save(validate: false)
 
-    inv = InviteCode.find_by(invite_code: resource.invite_code)
-    inv.used = true
-    inv.save!
+      inv = InviteCode.find_by(invite_code: resource.invite_code)
+      inv.used = true
+      inv.save!
 
     end
   end
@@ -92,12 +92,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :birthdate, :gender, :sexuality, :race, :religion, :about_me, :invite_code, :profile_viewability_level, :post_default_viewability_level])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name birthdate gender sexuality race religion about_me invite_code profile_viewability_level post_default_viewability_level])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :birthdate, :gender, :sexuality, :race, :religion, :about_me, :invite_code, :profile_viewability_level, :post_default_viewability_level])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name birthdate gender sexuality race religion about_me invite_code profile_viewability_level post_default_viewability_level])
   end
 
   # The path used after sign up.
