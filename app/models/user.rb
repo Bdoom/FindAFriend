@@ -27,45 +27,39 @@ class User < ApplicationRecord
 
   enum gender:
   {
-    male: 'Male',
-    female: 'Female',
-    mtf: 'MtF',
-    ftm: 'FtM',
-    non_binary: 'Non-Binary'
+    male: 0,
+    female: 1,
+    mtf: 2,
+    ftm: 3,
+    non_binary: 4
   }
 
   enum sexuality:
   {
-    heterosexual: 'Heterosexual',
-    homosexual: 'Homosexual',
-    bisexual: 'Bi-Sexual',
-    pansexual: 'Pan-sexual',
-    asexual: 'Asexual'
+    heterosexual: 0,
+    homosexual: 1,
+    bisexual: 2,
+    pansexual: 3,
+    asexual: 4
   }
 
   enum religion:
   {
-    buddhism: 'Buddhism',
-    hinduism: 'Hinduism',
-    sikhism: 'Sikhism',
-    christianity: 'Christianity',
-    catholicism: 'Catholicism',
-    eastern_and_oriential_orthodoxy: 'Eastern and Oriental Orthodoxy',
-    protestantism: 'Protestantism',
-    restorationism: 'Restorationism',
-    gnosticism: 'Gnosticism',
-    islam: 'Islam',
-    judaism: 'Judaism',
-    atheism: 'Atheism',
-    agnostic: 'Agnostic'
+    buddhism: 0,
+    hinduism: 1,
+    christianity: 2,
+    catholicism: 3,
+    islam: 4,
+    judaism: 5,
+    atheism: 6,
+    agnostic: 7
   }
 
   enum race:
   {
-    white: 'White',
-    black_or_african_american: 'Black or African American',
-    asian: 'Asian',
-    native_hawaiian_or_other_pacific_islander: 'Native Hawaiian or Other Pacific Islander'
+    white: 0,
+    black_or_african_american: 1,
+    asian: 2
   }
 
   validate :validate_age
