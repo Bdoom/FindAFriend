@@ -38,22 +38,22 @@
 
   <div class="form-group">
     <%= f.label :gender %> <br/>
-    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :sexuality %> <br/>
-    <%= f.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+    <%= f.select :sexuality, options_for_select(User.sexualities.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :race %> <br/>
-    <%= f.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+    <%= f.select :race, options_for_select(User.races.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control' %>
   </div>
   
   <div class="form-group">
     <%= f.label :religion %> <br/>
-    <%= f.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, v]}), class: 'form-control' %>
+    <%= f.select :religion, options_for_select(User.religions.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control' %>
   </div>
 
   <div class="form-group">
