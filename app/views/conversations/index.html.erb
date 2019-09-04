@@ -3,5 +3,7 @@
 
 <h2>Current Conversations</h2>
 <% @conversations.each do |convo| %>
-    <%= link_to convo.users.last.first_name, convo %>
+    <% if convo.topic == "" %>
+        <%= link_to convo.users.last.first_name, convo %>
+    <% end %>
 <% end %>
