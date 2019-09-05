@@ -1,0 +1,11 @@
+<%= form_with(model: @photo_album, local: true) do |f| %>  
+
+<div class="form-group row ml-2">
+    <div class="col-xs-4">
+        <%= f.label :title, 'New Album Title: ' %> <br />
+        <%= f.text_field :title, class: 'form-control' %> <br />
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+    </div>
+</div>
+
+<% end %>

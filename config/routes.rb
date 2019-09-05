@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :messages
-  
+
+  resources :photo_albums
+  resources :photos
+
   resources :posts do
     collection do
       get 'get_recent_posts'
