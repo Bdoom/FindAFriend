@@ -1,26 +1,27 @@
-<%= @photo_album.title %>
-<%= form_with(model: @photo, local: true) do |f| %>  
+<h1><%= @photo_album.title %></h1>
+<% if user_signed_in? && @photo_album.user == current_user %>
+    <%= form_with(model: @photo, local: true) do |f| %>  
 
-<div class="form-group row ml-2">
-    <div class="col-xs-4">
-        <%= f.label :title, 'New Photo Title: ' %> <br />
-        <%= f.text_field :title, class: 'form-control' %> <br />
-        <%= f.label :description, 'Description: ' %> <br />
-        <%= f.text_area :description, class: 'form-control' %> <br />
-        <%= f.file_field :image, class: 'form-control-file', accept: 'image/*' %> <br />
-        <%= f.hidden_field :photo_album_id, value: @photo_album.id %>
-        <%= f.submit 'Create', class: 'btn btn-primary' %>
+    <div class="form-group row ml-2">
+        <div class="col-xs-4">
+            <%= f.label :title, 'New Photo Title: ' %> <br />
+            <%= f.text_field :title, class: 'form-control' %> <br />
+            <%= f.label :description, 'Description: ' %> <br />
+            <%= f.text_area :description, class: 'form-control' %> <br />
+            <%= f.file_field :image, class: 'form-control-file', accept: 'image/*' %> <br />
+            <%= f.hidden_field :photo_album_id, value: @photo_album.id %>
+            <%= f.select :viewability_level, options_for_select(Photo.viewability_levels.map {|k,v| [k.humanize.capitalize, v]}) %>
+            <%= f.submit 'Create', class: 'btn btn-primary' %>
+        </div>
     </div>
-</div>
-
+    <% end %>
 <% end %>
 
-<% @photo_album.photos.each_slice(5) do |photos|%>
+<% @photo_album.photos.each_slice(3) do |photos|%>
 <div class="row">
 <% photos.each do |photo| %>
 <div class="col-md-4">
       <div class="thumbnail">
-        <a href="/w3images/lights.jpg" target="_blank">
         <%= link_to photo.title, photo %>
         <%= image_tag(photo.image, class: 'img-fluid') %>
           <div class="caption">

@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   resources :messages
 
   resources :photo_albums
-  resources :photos
+  resources :photos do
+    collection do
+      delete 'delete_photo'
+    end
+  end
 
   resources :posts do
     collection do

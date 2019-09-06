@@ -17,9 +17,37 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find params[:id]
+    @photo_album = @photo.photo_album
+
+    if @photo.viewability_level == Photo.viewability_levels[:only_me]
+      if @photo.photo_album.user != current_user
+        redirect_to root_path, notice: 'You do not have permission to view this album.'
+      end
+    end
+
+    if @photo.viewability_level == Photo.viewability_levels[:friends_only]
+      unless @photo.photo_album.user.friends.include? current_user
+        redirect_to root_path, notice: 'You do not have permission to view this album.'
+      end
+    end
+  end
+
+  def delete_photo
+    @photo = Photo.find params[:id]
+    @photo_album = @photo.photo_album
+
+    if @photo.photo_album.user == current_user
+      @photo.image.purge_later 
+      @photo.delete
+    end
+
+    respond_to do |format|
+        format.html { redirect_to @photo_album, notice: 'Photo was successfully deleted.' }
+        format.json { render :show, status: :deleted, location: @photo_album }
+    end
   end
 
   def create_sanitized_params
-    params.require(:photo).permit(:title, :description, :image, :photo_album_id)
+    params.require(:photo).permit(:title, :description, :image, :photo_album_id, :viewability_level)
   end
 end

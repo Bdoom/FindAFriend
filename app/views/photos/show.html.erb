@@ -1,5 +1,6 @@
 <% if @photo.image.attached? %>
     <%= image_tag url_for(@photo.image) %>
+    <%= link_to 'Delete', delete_photo_photos_path(id: @photo), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% else %>
 Photo not attached.
 <% end %>

@@ -4,6 +4,7 @@
     <div class="col-xs-4">
         <%= f.label :title, 'New Album Title: ' %> <br />
         <%= f.text_field :title, class: 'form-control' %> <br />
+        <%= f.select :viewability_level, options_for_select(PhotoAlbum.viewability_levels.map {|k,v| [k.humanize.capitalize, v]}) %>
         <%= f.submit 'Create', class: 'btn btn-primary' %>
     </div>
 </div>
