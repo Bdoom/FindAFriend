@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -38,7 +40,7 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  #default mailer url options
+  # default mailer url options
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Raise an error on page load if there are pending migrations.
@@ -50,10 +52,10 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  #config.assets.debug = true
+  # config.assets.debug = true
 
   # Suppress logger output for asset requests.
-  #config.assets.quiet = true
+  # config.assets.quiet = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
