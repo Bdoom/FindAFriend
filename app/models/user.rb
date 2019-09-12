@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   validates :invite_code, presence: true
 
+  has_one_attached :profile_picture
+
   has_friendship
   acts_as_follower
   acts_as_liker
