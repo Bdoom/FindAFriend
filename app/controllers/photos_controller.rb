@@ -37,13 +37,13 @@ class PhotosController < ApplicationController
     @photo_album = @photo.photo_album
 
     if @photo.photo_album.user == current_user
-      @photo.image.purge_later 
+      @photo.image.purge_later
       @photo.delete
     end
 
     respond_to do |format|
-        format.html { redirect_to @photo_album, notice: 'Photo was successfully deleted.' }
-        format.json { render :show, status: :deleted, location: @photo_album }
+      format.html { redirect_to @photo_album, notice: 'Photo was successfully deleted.' }
+      format.json { render :show, status: :deleted, location: @photo_album }
     end
   end
 
