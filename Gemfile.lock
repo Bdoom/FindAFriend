@@ -70,7 +70,6 @@ GEM
       xpath (~> 3.2)
     childprocess (1.0.1)
       rake (< 13.0)
-    choice (0.2.0)
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
@@ -88,6 +87,8 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.11.1)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     geocoder (1.5.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -149,11 +150,6 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-erd (1.6.0)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      choice (~> 0.2.0)
-      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
     railties (5.2.3)
@@ -192,7 +188,6 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
@@ -266,6 +261,7 @@ DEPENDENCIES
   chromedriver-helper
   city-state
   devise
+  friendly_id (~> 5.2.4)
   geocoder
   has_friendship
   jbuilder (~> 2.5)
@@ -273,7 +269,6 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rails (~> 5.2.3)
-  rails-erd
   ransack
   react-rails
   recaptcha

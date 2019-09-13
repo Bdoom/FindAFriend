@@ -79,3 +79,8 @@ random_posts = (0...1000).map { { user: User.first, body: SecureRandom.hex(7), p
 random_posts.each do |post|
 Post.find_or_create_by!(post)
 end
+
+board_names = ['general', 'anime', 'lgbt', 'politics', 'gaming']
+board_names.each do |board_name|
+  Board.create!(name: board_name)
+end
