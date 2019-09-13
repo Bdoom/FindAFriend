@@ -8,7 +8,9 @@
 <div class="row">
     <div class="col">
         <p>
-            <%= image_tag(url_for(@user.profile_picture), size: "150x150") %> <br />
+            <% if @user.profile_picture.attached? %>
+                <%= image_tag(url_for(@user.profile_picture), size: "150x150") %> <br />
+            <% end %>
             <%= @user.first_name %> <%= @user.last_name %> <br />
             Country: <%= @user.location.country %> <br />
             State: <%= @user.location.state %> <br />
