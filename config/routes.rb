@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :messages
+  resources :boards
 
   resources :photo_albums
   resources :photos do
