@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :boards
+  resources :board_threads, except: [:index]
 
   resources :photo_albums
   resources :photos do

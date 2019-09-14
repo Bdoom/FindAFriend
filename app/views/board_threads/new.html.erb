@@ -1,0 +1,11 @@
+<%= form_with model: @thread do |f| %>
+    <div class="form-group">
+        <%= f.label :choose_board %> <br />
+        <%= f.collection_select :board, Board.all, :id, :name, prompt: true, class: 'form-control' %> <br />
+        <%= f.label :thread_title %>
+        <%= f.text_field :title, class: 'form-control' %>
+        <%= f.label :thread_body %>
+        <%= f.text_area :body, class: 'form-control' %> <br />
+        <%= f.submit "Post Thread", class: 'btn btn-primary' %>
+    </div>
+<% end %>

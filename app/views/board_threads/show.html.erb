@@ -1,0 +1,25 @@
+<h1>Post new reply </h1>
+<%= form_with model: @post do |f| %>
+    <div class="form-group">
+        <%= f.text_area :body, class: 'form-control', id: 'message_body' %> <br />
+        <%= f.hidden_field :board_thread_id, value: @thread.id %>
+        <%= recaptcha_tags %>
+        <br />
+        <%= f.submit "Post", class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
+<h1 class="text-center"> <%= @thread.title %> </h1>
+<ul class="list-group">
+    <% @thread.posts.each do |post| %>
+        <li class="list-group-item clearfix">
+            <%= link_to post.user do %>
+                <%= post.user.first_name %>
+            <% end %>
+            <small><%= post.created_at %></small>
+            <p>
+                <%= post.body %>
+            </p>
+        </li>
+    <% end %>
+</ul>
