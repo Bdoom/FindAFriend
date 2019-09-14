@@ -14,6 +14,7 @@
     <% if @threads.nil? %>
         No threads on this board currently.
     <% end %>
-
+    
+    <br />
     <%= button_to  "New Thread", new_board_thread_path, method: :get, class: 'btn btn-primary' %>
 </div>
