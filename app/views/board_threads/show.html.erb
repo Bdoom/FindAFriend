@@ -11,6 +11,16 @@
 
 <h1 class="text-center"> <%= @thread.title %> </h1>
 <ul class="list-group">
+    <li class="list-group-item clearfix">
+        <%= link_to @thread.user do %>
+                <%= @thread.user.first_name %>
+        <% end %>
+        <small><%= @thread.created_at %></small>
+        <p>
+            <%= @thread.body %>
+        </p>
+    </li>
+
     <% @thread.posts.each do |post| %>
         <li class="list-group-item clearfix">
             <%= link_to post.user do %>

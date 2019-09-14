@@ -1,11 +1,19 @@
 <div class="list-group">
-    <% @threads.each do |thread| %>
-        <%= link_to thread, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
-            <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><%= thread.title %></h5>
-            <small><%= thread.created_at %></small>
-            </div>
-            <p class="mb-1"><%= thread.body %></p>
+    <% unless @threads.nil? %>
+        <% @threads.each do |thread| %>
+            <%= link_to thread, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= thread.title %></h5>
+                <small><%= thread.created_at %></small>
+                </div>
+                <p class="mb-1"><%= thread.body %></p>
+            <% end %>
         <% end %>
     <% end %>
+
+    <% if @threads.nil? %>
+        No threads on this board currently.
+    <% end %>
+
+    <%= button_to  "New Thread", new_board_thread_path, method: :get, class: 'btn btn-primary' %>
 </div>

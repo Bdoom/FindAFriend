@@ -80,7 +80,14 @@ random_posts.each do |post|
 Post.find_or_create_by!(post)
 end
 
-board_names = ['general', 'anime', 'lgbt', 'politics', 'gaming']
-board_names.each do |board_name|
-  Board.create!(name: board_name)
+boards = {
+  'general' => 'general discussion',
+  'anime' => 'discussion of japanese animated videos',
+  'lgbt' => 'discussion of lgbt topics',
+  'politics' => 'discussion of political topics',
+  'gaming' => 'discussion of video games'
+}
+
+boards.each do |name, description|
+  Board.create!(name: name, description: description)
 end
