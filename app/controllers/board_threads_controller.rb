@@ -1,0 +1,2 @@
+class BoardThreadsController < ApplicationController
+end

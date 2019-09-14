@@ -5,4 +5,6 @@ class Board < ApplicationRecord
   friendly_id :name, use: :slugged
 
   validates_uniqueness_of :name
+
+  has_many :board_threads
 end
