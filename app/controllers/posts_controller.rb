@@ -6,11 +6,10 @@ class PostsController < ApplicationController
     @post = Post.new(sanitized_create_params)
     @post.user_id = current_user.id
 
-
     if verify_recaptcha(model: @post) && @post.save
-      render json: { status: 'ok' }, status: 201
-    else
-      render json: { status: 'fail' }, status: 400
+      respond_to do |format|
+          format.js { render js: 'window.top.location.reload(true);' }
+      end
     end
   end
 

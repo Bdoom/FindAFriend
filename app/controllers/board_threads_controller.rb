@@ -27,8 +27,9 @@ class BoardThreadsController < ApplicationController
 
   def show
     @thread = BoardThread.find params[:id]
+    @posts = @thread.posts.order('created_at ASC')
     @post = Post.new
-
+    
   end
 
   def sanitized_params
