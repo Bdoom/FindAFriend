@@ -4,4 +4,4 @@
 
 add member list with status, and the ability to scroll up and see old messages
 users should also be clickable and take you to a profile (as should everything on the site, including the message boards)
-<%= react_component("Conversation", {user_profile_path: '/users/' , user_id: current_user.id, conversation_id: @conversation.id.to_s, first_name: current_user.first_name}) %>
+<%= react_component("Conversation", {user_profile_path: '/users/' , user_id: current_user.id, conversation_id: @conversation.id.to_s, first_name: current_user.first_name}, {prerender: true}) %>
