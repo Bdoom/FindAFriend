@@ -58,8 +58,6 @@ gem 'actionpack-page_caching'
 gem 'city-state'
 gem 'friendly_id', '~> 5.2.4' 
 
-gem 'rails_admin'
-
 gem 'passenger'
 
 group :development, :test do
