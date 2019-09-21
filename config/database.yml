@@ -52,5 +52,3 @@ test:
 production:
   <<: *default
   database: FindAFriend_production
-  username: FindAFriend
-  password: <%= ENV['FINDAFRIEND_DATABASE_PASSWORD'] %>
