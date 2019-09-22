@@ -3,12 +3,17 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { host: 'findafriend.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: '127.0.0.1',
-    port: 25,
-    domain: 'findafriend.com'
+  # config.action_mailer.default_url_options = { host: 'example.com' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #  address: '127.0.0.1',
+  #  port: 25,
+  #  domain: 'findafriend.com'
+  # }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: '0e251f192edf3e691fd235663b62e4fa-bbbc8336-bbc35685',
+    domain: 'harembuilder.com'
   }
 
   # Code is not reloaded between requests.
