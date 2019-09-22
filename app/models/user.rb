@@ -3,7 +3,15 @@
 class User < ApplicationRecord
   include FafEnums
 
-  devise :database_authenticatable, :registerable, :rememberable, :trackable, :timeoutable, :validatable, :lockable
+  devise :database_authenticatable,
+         :confirmable,
+         :registerable,
+         :rememberable,
+         :trackable,
+         :timeoutable,
+         :validatable,
+         :lockable,
+         :recoverable
 
   validates :invite_code, presence: true
 
@@ -12,7 +20,7 @@ class User < ApplicationRecord
   has_friendship
   acts_as_follower
   acts_as_liker
-  
+
   has_and_belongs_to_many :conversations
 
   has_many :posts
