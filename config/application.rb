@@ -11,6 +11,8 @@ module FindAFriend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    config.middleware.use Rack::Attack
+
     config.assets.enabled = false
 
     config.generators do |g|
