@@ -10,11 +10,10 @@ Rails.application.configure do
   #  port: 25,
   #  domain: 'findafriend.com'
   # }
-  config.action_mailer.default_url_options = { host: 'sandboxce3b717a165c431096aad5dff60ad24a.mailgun.org' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: '0e251f192edf3e691fd235663b62e4fa-bbbc8336-bbc35685',
-    domain: 'sandboxce3b717a165c431096aad5dff60ad24a.mailgun.org'
+    domain: 'mail.playveritex.com'
   }
 
   # Code is not reloaded between requests.
