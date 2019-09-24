@@ -13,8 +13,6 @@ class User < ApplicationRecord
          :lockable,
          :recoverable
 
-  validates :invite_code, presence: true
-
   has_one_attached :profile_picture
 
   has_friendship

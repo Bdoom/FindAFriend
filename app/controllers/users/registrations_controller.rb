@@ -4,28 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  before_action :validate_invite_code, only: [:create]
-
-  def validate_invite_code
-    invite_code = params[:user][:invite_code]
-
-    if !invite_code.nil?
-      validInviteCode = InviteCode.find_by(invite_code: invite_code) != nil
-      unless validInviteCode
-        redirect_to root_path, notice: 'Invite code is not valid.'
-      end
-
-      if validInviteCode
-        invite = InviteCode.find_by(invite_code: invite_code)
-        if invite.used
-          redirect_to root_path, notice: 'Invite code has been used.'
-        end
-      end
-    else
-      redirect_to root_path, notice: 'Invite code is not valid.'
-    end
-  end
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -56,10 +34,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.location_id = @location.id
 
       resource.save(validate: false)
-
-      inv = InviteCode.find_by(invite_code: resource.invite_code)
-      inv.used = true
-      inv.save!
 
     end
   end
