@@ -5,7 +5,7 @@ class Location < ApplicationRecord
     extend Geocoder::Model::ActiveRecord
     geocoded_by :address
 
-    validates :zipcode, zipcode: { country_code: :us }
+    #validates :zipcode, zipcode: { country_code: :us }
 
     has_one :user
 
