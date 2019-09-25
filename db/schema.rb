@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_14_210413) do
+ActiveRecord::Schema.define(version: 2019_09_25_142938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,8 +198,8 @@ ActiveRecord::Schema.define(version: 2019_09_14_210413) do
     t.integer "sexuality"
     t.integer "religion"
     t.integer "race"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.date "birthdate"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -218,7 +218,6 @@ ActiveRecord::Schema.define(version: 2019_09_14_210413) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "invite_code"
     t.string "status"
     t.integer "profile_viewability_level", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

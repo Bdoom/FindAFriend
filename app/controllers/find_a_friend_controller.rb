@@ -47,12 +47,16 @@ class FindAFriendController < ApplicationController
     user_to_friend = User.find params[:id]
 
     if user_to_friend.nil?
-      render json: { data: 'failed' }
+      respond_to do |format|
+        format.js { render js: 'window.top.location.reload(true);' }
+      end
     else
       unless user_to_friend.id == current_user.id
         unless current_user.pending_friends.include? user_to_friend
           current_user.friend_request(user_to_friend)
-          render json: { data: 'ok' }
+          respond_to do |format|
+            format.js { render js: 'window.top.location.reload(true);' }
+          end
         end
       end
     end
@@ -107,9 +111,7 @@ class FindAFriendController < ApplicationController
     our_activities_string = []
 
     Activity.all.each do |activity|
-      if current_user.likes?(activity)
-        our_activities_string.push(activity.name)
-      end
+      our_activities_string.push(activity.name) if current_user.likes?(activity)
     end
 
     locations.each do |location|

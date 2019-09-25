@@ -63,11 +63,6 @@ unless result.nil?
   user2.save!
 end
 
-random_posts = (0...1000).map { { user: User.first, body: SecureRandom.hex(7), post_visibility: 0 } }
-random_posts.each do |post|
-  Post.find_or_create_by!(post)
-end
-
 boards = {
   'general' => 'general discussion',
   'anime' => 'discussion of japanese animated videos',
