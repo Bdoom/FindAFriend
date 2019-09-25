@@ -14,9 +14,9 @@ class User < ApplicationRecord
          :recoverable
 
   has_one_attached :profile_picture
-  
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+
+  # validates :first_name, presence: true
+  # validates :last_name, presence: true
 
   has_friendship
   acts_as_follower
@@ -32,7 +32,7 @@ class User < ApplicationRecord
 
   belongs_to :location, optional: true
 
-  validates :about_me, length: { minimum: 150, maximum: 3000 }
+  #validates :about_me, length: { minimum: 150, maximum: 3000 }
 
   enum gender:
   {
