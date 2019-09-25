@@ -16,7 +16,7 @@
             State: <%= @user.location.state %> <br />
             <% if @user != current_user %>
                 <% unless current_user.pending_friends.include? @user %>
-                    <%= button_to  "Add Friend", send_friend_request_find_a_friend_index_path, class: 'btn btn-primary', method: :put, params: { id: @user.id } %>
+                    <%= button_to "Add Friend", send_friend_request_find_a_friend_index_path, class: 'btn btn-primary', method: :put, params: { id: @user.id } %>
                 <% end %>
             <% end %>
         </p>

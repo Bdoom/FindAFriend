@@ -46,19 +46,16 @@ class FindAFriendController < ApplicationController
   def send_friend_request
     user_to_friend = User.find params[:id]
 
-    if user_to_friend.nil?
-      respond_to do |format|
-        format.js { render js: 'window.top.location.reload(true);' }
-      end
-    else
+    unless user_to_friend.nil?
       unless user_to_friend.id == current_user.id
         unless current_user.pending_friends.include? user_to_friend
           current_user.friend_request(user_to_friend)
-          respond_to do |format|
-            format.js { render js: 'window.top.location.reload(true);' }
-          end
         end
       end
+    end
+
+    respond_to do |format|
+      format.js { render js: 'window.top.location.reload(true);' }
     end
   end
 
