@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BoardThreadsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create]
+
   def new
     @thread = BoardThread.new
   end
