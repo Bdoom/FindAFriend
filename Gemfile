@@ -62,6 +62,9 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'mailgun-ruby'
 gem 'rack-attack'
 
+gem 'dynamic_sitemaps'
+gem 'whenever'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

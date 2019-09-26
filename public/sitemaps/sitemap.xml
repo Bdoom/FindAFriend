@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/uwuanimu.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/users.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/photos.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/photo_albums.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/board_threads.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/boards.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://www.uwuanimu.com/sitemaps/conversations.xml</loc>
+</sitemap>
+</sitemapindex>
