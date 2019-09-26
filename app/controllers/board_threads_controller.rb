@@ -29,7 +29,10 @@ class BoardThreadsController < ApplicationController
     @thread = BoardThread.find params[:id]
     @posts = @thread.posts.order('created_at ASC')
     @post = Post.new
-    
+
+    @page_title       = @thread.title
+    @page_description = @thread.body
+    set_meta_tags nofollow: true
   end
 
   def sanitized_params

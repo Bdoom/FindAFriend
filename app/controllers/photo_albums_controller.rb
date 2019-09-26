@@ -8,6 +8,9 @@ class PhotoAlbumsController < ApplicationController
   def show
     @photo_album = PhotoAlbum.find params[:id]
 
+    @page_title       = @photo_album.title
+    @page_description = @photo_album.title
+
     if @photo_album.viewability_level == PhotoAlbum.viewability_levels[:only_me]
       if current_user != @photo_album.user
         redirect_to root_path, notice: 'You do not have permission to view this album.'
@@ -15,9 +18,9 @@ class PhotoAlbumsController < ApplicationController
     end
 
     if @photo_album.viewability_level == PhotoAlbum.viewability_levels[:friends_only]
-        unless @photo_album.user.friends.include? current_user
-            redirect_to root_path, notice: 'You do not have permission to view this album.'
-        end
+      unless @photo_album.user.friends.include? current_user
+        redirect_to root_path, notice: 'You do not have permission to view this album.'
+      end
     end
 
     @photos = @photo_album.photos

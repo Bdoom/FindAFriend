@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FindAFriend</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_packs_with_chunks_tag 'application', 'data-turbolinks-tracl': 'reload' %>
     <%= action_cable_meta_tag %>
+    <%= display_meta_tags site: 'uwuanimu' %>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -22,7 +22,7 @@
     <div class="container-fluid h-100">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <h1 class="text-center"> FindAFriend </h1>
+      <h1 class="text-center"> uwuanimu </h1>
       <%= render "layouts/navbar" %>
       <%= yield %>
       <% if user_signed_in? %>

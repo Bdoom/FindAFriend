@@ -30,6 +30,9 @@ class PhotosController < ApplicationController
         redirect_to root_path, notice: 'You do not have permission to view this album.'
       end
     end
+
+    @page_title       = @photo.title
+    @page_description = @photo.description
   end
 
   def delete_photo
