@@ -26,7 +26,7 @@ class User < ApplicationRecord
       user.refresh_token = auth.credentials.refresh_token
       user.first_name = 'Unknown'
       user.last_name = 'Name'
-      #user.password = Devise.friendly_token[0, 20]
+      user.password = user.password #Devise.friendly_token[0, 20]
       user.skip_confirmation!
       user.save!
     end
