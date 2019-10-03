@@ -40,6 +40,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 
 gem 'geocoder'
+
+gem 'omniauth-google-oauth2'
+gem 'omniauth-discord'
+
 gem 'ransack'
 gem 'react-rails'
 gem 'rubocop'

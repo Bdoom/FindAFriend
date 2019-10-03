@@ -284,6 +284,19 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
+  # google_client_id = '654625669161-mcml3r4hck58pri3tl9d7ep52caji400.apps.googleusercontent.com'
+  # google_client_secret = 'PmDIWlrKVyvpRTT9hsAFEgNA'
+  # # Configure Google omniauth with proper scope
+  # config.omniauth :google_oauth2, google_client_id, google_client_secret, {
+  #                 scope: 'contacts.readonly,userinfo.email'
+  # }
+
+  discord_client_id = '629108377124995102'
+  discord_client_secret = 'POaaxNKCxzVoGyT5ktRiLuREzNFQkr3a'
+  config.omniauth :discord, discord_client_id, discord_client_secret, {
+    scope: 'email identify'
+  }
+
   # ==> Turbolinks configuration
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
   #

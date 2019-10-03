@@ -34,7 +34,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
-    unlocks: 'users/unlocks'
+    unlocks: 'users/unlocks',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   get '/findafriend', to: 'find_a_friend#search', as: 'findafriend'

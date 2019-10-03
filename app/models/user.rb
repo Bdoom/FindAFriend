@@ -11,7 +11,10 @@ class User < ApplicationRecord
          :timeoutable,
          :validatable,
          :lockable,
-         :recoverable
+         :recoverable,
+         :omniauthable, omniauth_providers: %i[google_oauth2 discord]
+
+        
 
   has_one_attached :profile_picture
 
