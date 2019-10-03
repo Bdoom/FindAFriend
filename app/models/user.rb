@@ -18,7 +18,11 @@ class User < ApplicationRecord
     # Either create a User record or update it based on the provider (Google) and the UID
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider
-      user.email = auth.info.email unless auth.info.nil?
+
+      unless user.email != nil
+        user.email = auth.info.email
+      end
+
       user.token = auth.credentials.token
       user.expires = auth.credentials.expires
       user.expires_at = auth.credentials.expires_at
