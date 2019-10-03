@@ -18,16 +18,24 @@ class User < ApplicationRecord
     # Either create a User record or update it based on the provider (Google) and the UID
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       puts "Auth: #{auth}"
-      
+
       user.provider = auth.provider
       user.email = auth.email
-      user.token = auth.credentials.token
-      user.expires = auth.credentials.expires
-      user.expires_at = auth.credentials.expires_at
-      user.refresh_token = auth.credentials.refresh_token
-      user.password = Devise.friendly_token[0, 20]
+      #user.token = auth.credentials.token
+      #user.expires = auth.credentials.expires
+      #user.expires_at = auth.credentials.expires_at
+      #user.refresh_token = auth.credentials.refresh_token
+      #user.password = Devise.friendly_token[0, 20]
     end
- end
+  end
+
+  def email_required?
+    super && provider.blank?
+  end
+
+  def password_required?
+    super && provider.blank?
+  end
 
   has_one_attached :profile_picture
 
