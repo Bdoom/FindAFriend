@@ -12,7 +12,7 @@
                 <%= image_tag(url_for(@user.profile_picture), size: "150x150") %> <br />
             <% end %>
             <%= @user.first_name %> <%= @user.last_name %> <br />
-            <%= unless @user.location.nil? >
+            <%= unless @user.location.nil? %>
             Country: <%= @user.location.country %> <br />
             State: <%= @user.location.state %> <br />
             <% end %>
