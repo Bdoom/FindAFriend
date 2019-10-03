@@ -18,7 +18,7 @@ class User < ApplicationRecord
     puts "Auth: #{auth.to_s}"
 
     # Either create a User record or update it based on the provider (Google) and the UID
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
 
       user.provider = auth.provider
       user.email = auth.info.email unless auth.info.nil?
@@ -26,8 +26,8 @@ class User < ApplicationRecord
       user.expires = auth.credentials.expires
       user.expires_at = auth.credentials.expires_at
       user.refresh_token = auth.credentials.refresh_token
-      user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
+      user.save!
     end
   end
 
