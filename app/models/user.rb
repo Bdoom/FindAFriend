@@ -20,20 +20,20 @@ class User < ApplicationRecord
       puts "Auth: #{auth}"
 
       user.provider = auth.provider
-      user.email = auth.email
-      #user.token = auth.credentials.token
-      #user.expires = auth.credentials.expires
-      #user.expires_at = auth.credentials.expires_at
-      #user.refresh_token = auth.credentials.refresh_token
-      #user.password = Devise.friendly_token[0, 20]
+      user.email = auth.info.email unless auth.info.nil?
+      # user.token = auth.credentials.token
+      # user.expires = auth.credentials.expires
+      # user.expires_at = auth.credentials.expires_at
+      # user.refresh_token = auth.credentials.refresh_token
+      # user.password = Devise.friendly_token[0, 20]
     end
   end
 
-  def email_required?
+  def self.email_required?
     super && provider.blank?
   end
 
-  def password_required?
+  def self.password_required?
     super && provider.blank?
   end
 
