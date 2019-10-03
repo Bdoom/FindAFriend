@@ -15,18 +15,19 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[discord]
 
   def self.from_omniauth(auth)
+    puts "Auth: #{auth.to_s}"
+
     # Either create a User record or update it based on the provider (Google) and the UID
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      puts "Auth: #{auth}"
 
       user.provider = auth.provider
       user.email = auth.info.email unless auth.info.nil?
+      user.token = auth.credentials.token
+      user.expires = auth.credentials.expires
+      user.expires_at = auth.credentials.expires_at
+      user.refresh_token = auth.credentials.refresh_token
+      user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
-      # user.token = auth.credentials.token
-      # user.expires = auth.credentials.expires
-      # user.expires_at = auth.credentials.expires_at
-      # user.refresh_token = auth.credentials.refresh_token
-      # user.password = Devise.friendly_token[0, 20]
     end
   end
 
