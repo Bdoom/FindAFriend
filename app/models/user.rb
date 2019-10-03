@@ -15,8 +15,6 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[discord]
 
   def self.from_omniauth(auth)
-    puts "Auth: #{auth}"
-
     # Either create a User record or update it based on the provider (Google) and the UID
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider
