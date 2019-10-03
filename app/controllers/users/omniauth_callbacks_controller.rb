@@ -3,6 +3,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
+  skip_before_filter :authenticate_user!
 
   def discord
     @user = User.from_omniauth(request.env['omniauth.auth'])

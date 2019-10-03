@@ -16,18 +16,14 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     # Either create a User record or update it based on the provider (Google) and the UID
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+    User.where(provider: auth.provider, email: auth.info.email).first_or_initialize do |user|
       user.provider = auth.provider
-
-      unless user.email != nil
-        user.email = auth.info.email
-      end
+      user.uid = auth.uid
 
       user.token = auth.credentials.token
       user.expires = auth.credentials.expires
       user.expires_at = auth.credentials.expires_at
       user.refresh_token = auth.credentials.refresh_token
-      user.password = Devise.friendly_token[0, 20]
       user.first_name = 'Unknown'
       user.last_name = 'Name'
       user.skip_confirmation!
