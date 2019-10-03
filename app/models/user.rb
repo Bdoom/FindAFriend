@@ -21,6 +21,7 @@ class User < ApplicationRecord
 
       user.provider = auth.provider
       user.email = auth.info.email unless auth.info.nil?
+      user.skip_confirmation!
       # user.token = auth.credentials.token
       # user.expires = auth.credentials.expires
       # user.expires_at = auth.credentials.expires_at
