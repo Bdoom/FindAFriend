@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def discord
     @user = User.from_omniauth(request.env['omniauth.auth'])
-    signin_and_redirect @user
+    sign_in @user
   end
 
   # You should also create an action method in this controller like this:
