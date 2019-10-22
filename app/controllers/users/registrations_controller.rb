@@ -45,17 +45,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    #super
+    # super
 
     # For Rails 4
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-    # For Rails 3
-    # account_update_params = params[:user]
 
     # required for settings form to submit when password is left blank
     if account_update_params[:password].blank?
-      account_update_params.delete("password")
-      account_update_params.delete("password_confirmation")
+      account_update_params.delete('password')
+      account_update_params.delete('password_confirmation')
     end
 
     @user = User.find(current_user.id)
@@ -87,12 +85,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name birthdate gender sexuality race religion invite_code profile_viewability_level post_default_viewability_level])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name birthdate gender profile_viewability_level post_default_viewability_level])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name birthdate gender sexuality race religion invite_code profile_viewability_level post_default_viewability_level])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name birthdate profile_viewability_level post_default_viewability_level])
   end
 
   # The path used after sign up.
