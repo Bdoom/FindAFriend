@@ -22,7 +22,7 @@
     </li>
 
     <% @posts.each do |post| %>
-        <li class="list-group-item clearfix">
+        <li class="list-group-item clearfix text-dark">
             <%= link_to post.user do %>
                 <%= post.user.first_name %>
             <% end %>
