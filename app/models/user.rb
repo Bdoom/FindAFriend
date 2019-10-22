@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   include FafEnums
 
+  attr_accessor :current_password
+
   devise :database_authenticatable,
          :confirmable,
          :registerable,
