@@ -3,12 +3,6 @@
 class FindAFriendController < ApplicationController
   before_action :logged_in?
 
-  def search
-    @potential_friends = find_friends_algorithm
-
-    render 'find_a_friend/search'
-  end
-
   def get_friends_list
     render json: { friends: current_user.friends }, except: [:email]
   end

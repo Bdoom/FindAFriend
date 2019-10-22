@@ -1,3 +1,15 @@
+<h3>
+Make new friends with people around you.
+</h3>
+
+<ul class="list-unstyled">
+<li> Share photos </li>
+<li> Join our chat rooms </li>
+<li> Message boards </li>
+<li> Post to your own profile. </li>
+<ul>
+<br/>
+
 <h1>Login</h1>
 <%= form_for(:user, :url => session_path(:user)) do |f|%>
   <div class="form-group">
@@ -12,4 +24,6 @@
     <%= f.submit "Login", class: 'btn btn-primary' %>
   </div>
 <% end %>
-<%= link_to  "Sign Up", new_user_registration_path %>
+
+<%= link_to  "Sign Up", new_user_registration_path %><br/>
+<%= link_to "Sign in with Discord", user_discord_omniauth_authorize_path %>

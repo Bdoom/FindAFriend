@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       end
     end
 
-    @page_title       = "#{@user.first_name} #{@user.last_name}"
-    @page_description = @user.about_me
+    @page_title = "#{@user.first_name} #{@user.last_name}"
   end
+  
 end

@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  get '/findafriend', to: 'find_a_friend#search', as: 'findafriend'
   get '/dashboard', to: 'find_a_friend#dashboard', as: 'dashboard'
 
   mount ActionCable.server => '/cable'
