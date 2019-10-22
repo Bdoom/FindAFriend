@@ -210,7 +210,7 @@ setup_chat_connection()
   {
     var users = this.state.users.map((user, index) => {
       return (
-        <li key={index} className="list-group-item">{user.first_name}</li>
+        <li key={index} className="list-group-item text-white">{user.first_name}</li>
       );
     });
 
