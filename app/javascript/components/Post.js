@@ -7,8 +7,8 @@ class Post extends React.Component {
       <React.Fragment>
         <article className="card">
             <span className="card-body">
-              <div>{this.props.created_at}</div>
-              {this.props.post_body}
+              <div className="text-dark">{this.props.created_at}</div>
+              <div className="text-dark">{this.props.post_body}</div>
             </span>
         </article>
       </React.Fragment>

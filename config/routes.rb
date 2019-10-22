@@ -38,18 +38,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  get '/dashboard', to: 'find_a_friend#dashboard', as: 'dashboard'
-
   mount ActionCable.server => '/cable'
-
-  resources :activities, only: [] do
-    collection do
-      put 'add_activity_to_user'
-      patch 'add_activity_to_user'
-      patch 'remove_activity_from_user'
-      get 'get_activity_list'
-    end
-  end
 
   resources :find_a_friend, only: [] do
     collection do

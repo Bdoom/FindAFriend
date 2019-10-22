@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   def index
     if current_user != nil
-      redirect_to dashboard_path
+      redirect_to user_path(current_user)
     else
       render 'home/index'
     end

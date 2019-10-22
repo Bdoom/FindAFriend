@@ -7,21 +7,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Activity.create!([
-                   { name: 'Movies' },
-                   { name: 'Walking' },
-                   { name: 'Running' },
-                   { name: 'Dancing' },
-                   { name: 'Improv' },
-                   { name: 'Soccer' },
-                   { name: 'Hockey' },
-                   { name: 'Basketball' },
-                   { name: 'Kickboxing' },
-                   { name: 'MMA' },
-                   { name: 'Stand-up comedy' },
-                   { name: 'Karaoke' },
-                   { name: 'Concerts' }
-                 ])
 
 CS.states(:us).each do |key, _value|
   convo = Conversation.new
@@ -29,8 +14,8 @@ CS.states(:us).each do |key, _value|
   convo.save
 end
 
-user1 = User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel', about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39')
-user2 = User.create!(email: 'bdoom@playveritex.com', first_name: 'Brian', last_name: 'Pie', password: 'travel', password_confirmation: 'travel', about_me: '3bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a393bde22b6897a39')
+user1 = User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel')
+user2 = User.create!(email: 'bdoom@playveritex.com', first_name: 'Brian', last_name: 'Pie', password: 'travel', password_confirmation: 'travel')
 
 @ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
 

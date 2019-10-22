@@ -92,51 +92,7 @@ class FindAFriendController < ApplicationController
     end
   end
 
-  def find_friends_algorithm
-    set_user_location_if_required
-
-    locations = Location.near([current_user.location.latitude, current_user.location.longitude], 5)
-    users_in_our_area = []
-    potential_friends = []
-
-    our_activities_string = []
-
-    Activity.all.each do |activity|
-      our_activities_string.push(activity.name) if current_user.likes?(activity)
-    end
-
-    locations.each do |location|
-      users_in_our_area.push(location.user)
-    end
-
-    users_in_our_area.each do |user|
-      next if user.nil?
-
-      other_users_liked_activities = []
-      other_user = User.find user.id
-
-      Activity.all.each do |activity|
-        if other_user.likes?(activity)
-          other_users_liked_activities.push(activity.name)
-        end
-      end
-
-      other_users_liked_activities.each do |activity_name|
-        next unless our_activities_string.include? activity_name
-
-        next if user.id == current_user.id
-
-        next if current_user.friends_with?(user)
-
-        unless current_user.pending_friends.include? user
-          potential_friends.push(user)
-        end
-      end
-    end
-
-    potential_friends.uniq
-  end
-
+ 
   def dashboard
     render 'find_a_friend/dashboard'
   end

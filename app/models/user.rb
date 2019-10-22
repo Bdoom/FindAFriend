@@ -66,7 +66,6 @@ class User < ApplicationRecord
 
   belongs_to :location, optional: true
 
-  # validates :about_me, length: { minimum: 150, maximum: 3000 }
 
   enum gender:
   {
@@ -75,34 +74,6 @@ class User < ApplicationRecord
     mtf: 2,
     ftm: 3,
     non_binary: 4
-  }
-
-  enum sexuality:
-  {
-    heterosexual: 0,
-    homosexual: 1,
-    bisexual: 2,
-    pansexual: 3,
-    asexual: 4
-  }
-
-  enum religion:
-  {
-    buddhism: 0,
-    hinduism: 1,
-    christianity: 2,
-    catholicism: 3,
-    islam: 4,
-    judaism: 5,
-    atheism: 6,
-    agnostic: 7
-  }
-
-  enum race:
-  {
-    white: 0,
-    black_or_african_american: 1,
-    asian: 2
   }
 
   validate :validate_age

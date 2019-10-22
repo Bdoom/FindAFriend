@@ -65,7 +65,6 @@ class FindAFriendSearch extends React.Component {
       return (
         <tr key={index}>
           <td><a href={"/users/" + friendo.id}>{friendo.first_name + ' ' + friendo.last_name}</a></td>
-          <td>{friendo.about_me}</td>
           <td>{friendo.gender}</td>
           <td>{friendo.sexuality}</td>
           <td>{friendo.religion}</td>
