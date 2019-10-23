@@ -14,7 +14,7 @@ CS.states(:us).each do |key, _value|
   convo.save
 end
 
-user1 = User.create!(email: 'damianscape@gmail.com', first_name: 'Daniel', last_name: 'Gleason', password: 'travel', password_confirmation: 'travel')
+user1 = User.create!(email: 'damianscape@gmail.com', first_name: 'Anonymous', last_name: '', password: 'travel', password_confirmation: 'travel')
 user2 = User.create!(email: 'bdoom@playveritex.com', first_name: 'Brian', last_name: 'Pie', password: 'travel', password_confirmation: 'travel')
 
 @ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish

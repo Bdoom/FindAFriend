@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BoardThreadsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
 
   breadcrumb 'Boards', :boards_path, only: [:show]
 
@@ -12,7 +11,12 @@ class BoardThreadsController < ApplicationController
   def create
     @thread = BoardThread.new
     @thread.board_id = sanitized_params[:board]
-    @thread.user_id = current_user.id
+    @thread.user_id = if current_user.nil?
+      1 #temp solution for anonymous posting
+    else
+      current_user.id
+    end
+
     @thread.title = sanitized_params[:title]
     @thread.body = sanitized_params[:body]
 

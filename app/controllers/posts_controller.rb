@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-
   def create
     @post = Post.new(sanitized_create_params)
-    @post.user_id = current_user.id
+
+    @post.user_id = if current_user.nil?
+                      1 # anonymous default account.
+                    else
+                      current_user.id
+                    end
 
     if verify_recaptcha(model: @post) && @post.save
       respond_to do |format|
-          format.js { render js: 'window.top.location.reload(true);' }
+        format.js { render js: 'window.top.location.reload(true);' }
       end
     end
   end

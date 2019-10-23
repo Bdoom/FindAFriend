@@ -2,7 +2,7 @@
 
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[show edit update destroy]
-  before_action :logged_in?
+  #before_action :logged_in?
 
   def logged_in?
     unless user_signed_in?
