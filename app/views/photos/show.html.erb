@@ -1,5 +1,18 @@
 <% if @photo.image.attached? %>
-    <%= image_tag url_for(@photo.image) %>
+<nav aria-label="breadcrumb">
+  <ol class='breadcrumb'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
+        <%= link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
+
+    <%= link_to url_for(@photo.image) do %>
+        <%= image_tag(url_for(@photo.image), size: '640x427') %> <br />
+    <% end %>
+
     <% if @photo.photo_album.user == current_user %>
         <%= link_to 'Delete', delete_photo_photos_path(id: @photo), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>

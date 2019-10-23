@@ -1,3 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class='breadcrumb'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
+        <%= link_to crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
+
 <h1><%= @photo_album.title %></h1>
 <% if user_signed_in? && @photo_album.user == current_user %>
     <%= form_with(model: @photo, local: true) do |f| %>  

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PhotoAlbumsController < ApplicationController
+  breadcrumb 'Photo Albums', :photo_albums_path, only: [:show]
+
   def index
     @photo_albums = current_user.photo_albums
   end
@@ -41,6 +43,8 @@ class PhotoAlbumsController < ApplicationController
     @photos -= @photos_to_remove
 
     @photo = Photo.new
+
+    breadcrumb @photo_album.title, photo_album_path(@photo_album)
   end
 
   def new

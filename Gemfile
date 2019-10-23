@@ -69,6 +69,7 @@ gem 'dynamic_sitemaps'
 gem 'whenever'
 
 gem 'meta-tags'
+gem 'loaf'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

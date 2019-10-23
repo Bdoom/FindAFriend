@@ -1,4 +1,14 @@
 <div class="list-group">
+<nav aria-label="breadcrumb">
+  <ol class='breadcrumb'>
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
+        <%= link_to crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {}) %>
+      </li>
+    <% end %>
+  </ol>
+</nav>
+
     <% unless @threads.nil? %>
         <% @threads.each do |thread| %>
             <%= link_to thread, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>

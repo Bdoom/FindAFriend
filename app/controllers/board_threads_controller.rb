@@ -3,6 +3,8 @@
 class BoardThreadsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
 
+  breadcrumb 'Boards', :boards_path, only: [:show]
+
   def new
     @thread = BoardThread.new
   end
@@ -35,6 +37,7 @@ class BoardThreadsController < ApplicationController
     @page_title       = @thread.title
     @page_description = @thread.body
     set_meta_tags nofollow: true
+    breadcrumb @thread.board.name, board_path(@thread.board)
   end
 
   def sanitized_params

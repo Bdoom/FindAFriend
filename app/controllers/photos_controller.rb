@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PhotosController < ApplicationController
+  breadcrumb 'Photo Albums', :photo_albums_path, only: [:show]
+
   def create
     @photo = Photo.new(create_sanitized_params)
 
@@ -33,6 +35,7 @@ class PhotosController < ApplicationController
 
     @page_title       = @photo.title
     @page_description = @photo.description
+    breadcrumb @photo.photo_album.title, photo_album_path(@photo.photo_album)
   end
 
   def delete_photo
