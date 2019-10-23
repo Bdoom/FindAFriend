@@ -48,9 +48,7 @@ class FindAFriendController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      format.js { render js: 'window.top.location.reload(true);' }
-    end
+    redirect_to user_path(user_to_friend)
   end
 
   def block_friend
@@ -92,7 +90,6 @@ class FindAFriendController < ApplicationController
     end
   end
 
- 
   def dashboard
     render 'find_a_friend/dashboard'
   end

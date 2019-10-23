@@ -86,10 +86,11 @@ class Profile extends React.Component {
       var posts = this.state.posts.map((post, index) => {
         var date = new Date(post.created_at);
         var date = "Posted: " + Number(date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
+        var board_thread_id = post.board_thread_id;
 
         return (
           <li key={index} className="list-group-item">
-            <Post created_at={date} post_body={post.body} />
+            <Post created_at={date} post_body={post.body} board_thread_id={board_thread_id} />
           </li>
         );
       });
