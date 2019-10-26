@@ -45,7 +45,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    super
+    # super
 
     # For Rails 4
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
