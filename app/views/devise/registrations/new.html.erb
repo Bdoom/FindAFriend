@@ -5,7 +5,7 @@
 
   <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
@@ -13,32 +13,32 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: 'form-control' %>
+    <%= f.text_field :first_name, class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
     <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: 'form-control' %>
+    <%= f.text_field :last_name, class: 'form-control', required: true%>
   </div>
 
   <div class="form-group">
     <%= f.label :birthdate %> <br/>
-    <%= f.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control') %>
+    <%= f.date_select(:birthdate, include_blank: true, selected: Date.today, start_year: Date.today.year - 100, end_year: Date.today.year - 18, class: 'form-control', required: true) %>
   </div>
 
   <div class="form-group">
     <%= f.label :gender %> <br/>
-    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control' %>
+    <%= f.select :gender, options_for_select(User.genders.map {|k, v| [k.to_s.humanize.capitalize, k]}), class: 'form-control', required: true %>
   </div>
 
   <div class="actions">
