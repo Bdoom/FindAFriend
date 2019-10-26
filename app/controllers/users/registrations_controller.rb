@@ -33,8 +33,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       resource.location_id = @location.id
 
-      resource.save(validate: false)
-
+      #resource.save(validate: false)
+      resource.save
     end
   end
 
@@ -113,4 +113,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.update_with_password(params)
     end
   end
+
 end
