@@ -28,6 +28,12 @@ require( 'datatables.net-bs4' )
 
 import '../stylesheets/application'
 
+// If you are using `import` syntax
+import '@client-side-validations/client-side-validations'
+
+// If you are using `require` syntax
+require('@client-side-validations/client-side-validations')
+
 // Support component names relative to this directory:
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
