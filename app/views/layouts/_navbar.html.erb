@@ -1,5 +1,9 @@
 <ul class="nav nav-pills justify-content-center">
 
+<li class="nav-item">
+    <%= link_to 'Home', root_path %>
+</li>
+
 <% if user_signed_in? %>
 <li class="nav-item">
 <% if current_page?(user_path(current_user)) %>
@@ -43,6 +47,7 @@
 <% end %>
 </li>
 <% end %>
+
 
 <li class="nav-item">
 <% if current_page?(boards_path) %>

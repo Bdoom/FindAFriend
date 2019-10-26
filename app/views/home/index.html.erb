@@ -2,28 +2,35 @@
 Make new friends with people around you.
 </h3>
 
-<ul class="list-unstyled">
-<li> Share photos </li>
-<li> Join our chat rooms </li>
-<li> Message boards </li>
-<li> Post to your own profile. </li>
-<ul>
-<br/>
+<div class="row">
+  <ul class="list-unstyled col">
+    <li> Share photos </li>
+    <li> Join our chat rooms </li>
+    <li> Message boards </li>
+    <li> Post to your own profile. </li>
+  <ul>
+</div>
 
 <h1>Login</h1>
 <%= form_for(:user, :url => session_path(:user)) do |f|%>
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.text_field :email, class: 'form-control' %>
+  <div class="row">
+      <div class="form-group col">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group col">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div> 
   </div>
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>  
-  <div class=”actions”>
-    <%= f.submit "Login", class: 'btn btn-primary' %>
+
+  <div class="row">
+    <div class="actions col">
+      <%= f.submit "Login", class: 'btn btn-primary' %>
+      <br /> <br />
+      <%= button_to  "Login with Discord", user_discord_omniauth_authorize_path, class: 'btn btn-primary' %> <br /> <br />
+      <%= button_to  "Sign Up", new_user_registration_path, class: 'btn btn-primary' %><br/> <br />
+    </div>
   </div>
 <% end %>
 
-<%= link_to  "Sign Up", new_user_registration_path %><br/>
-<%= link_to "Sign in with Discord", user_discord_omniauth_authorize_path %>
