@@ -23,8 +23,6 @@ require("channels")
 require("jquery")
 require("bootstrap/dist/js/bootstrap")
 
-require("jquery-validation")
-
 require( 'datatables.net-bs4' )
 
 
