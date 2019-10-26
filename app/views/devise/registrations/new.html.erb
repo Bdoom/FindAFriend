@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), id: 'registration_form') do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
@@ -48,7 +48,7 @@
 
 <script type="text/javascript">
 $(document).ready(function () { 
-   $("#registration_form").validate();  
+   $("form").validate();  
 }); 
 </script>
 
