@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
+    
+
+
   resources :conversations, except: [:edit] do
     collection do
       post 'create_new_message'
@@ -68,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   get 'api/status', controller: 'api', action: 'status'
+  post 'delete_multiple_threads', controller: 'admin', action: 'delete_multiple_threads'
 
   root 'home#index'
 end

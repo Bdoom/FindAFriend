@@ -1,4 +1,4 @@
-<div class="list-group">
+<ul class="list-group">
 <nav aria-label="breadcrumb">
   <ol class='breadcrumb'>
     <% breadcrumb_trail do |crumb| %>
@@ -10,15 +10,36 @@
 </nav>
 
     <% unless @threads.nil? %>
+    
         <% @threads.each do |thread| %>
-            <%= link_to thread, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><%= thread.title %></h5>
-                <small><%= thread.created_at %></small>
-                </div>
-                <p class="mb-1"><%= thread.body %></p>
-            <% end %>
+            <li class="list-group-item">
+              <% if current_user.admin? %>
+                  <%= check_box_tag "thread_ids[]", thread.id %>
+              <% end %>
+              <%= thread.user.first_name %>
+
+              <%= link_to thread, class: 'link_no_styling' do %>
+                  <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= thread.title %></h5>
+                  <small><%= thread.created_at %></small>
+                  </div>
+                  <p class="mb-1"><%= thread.body %></p>
+              <% end %>
+            </li>
         <% end %>
+    
+      <% if current_user.admin? %>
+        <%= form_with(url: delete_multiple_threads_path) do |f| %>
+          <%= label_tag "Admin Actions" %> <br />
+          <div class="btn-group-vertical">
+              <%= f.button 'Delete', class: 'btn btn-danger' %>
+              <%= f.button 'Delete and Ban User', class: 'btn btn-danger' %>
+              <%= f.hidden_field :thread_ids, multiple: true %>
+          </div>
+        <% end %>
+          # get all checkboxed threads/posts and perform these actions on thme. 
+      <% end %>
+
     <% end %>
 
     <% if @threads.nil? %>
@@ -27,4 +48,30 @@
     
     <br />
     <%= button_to "New Thread", new_board_thread_path, params: {board: @board.id} , method: :get, class: 'btn btn-primary' %>
-</div>
+</ul>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+  var checked_checkboxes = []
+
+  $("input[type='checkbox']").on('change', function()
+  {
+    if (this.checked)
+    {
+      checked_checkboxes.push(this.value)
+      $("input[type='hidden'][id='thread_ids'").val(checked_checkboxes)
+    }
+    else 
+    {
+      var base_value = this.value
+      var filteredArray = checked_checkboxes.filter(function(value, index, arr){
+          return value != base_value
+      })
+      checked_checkboxes = filteredArray
+      $("input[type='hidden'][id='thread_ids']").val(checked_checkboxes)
+    }
+  })
+
+})
+</script>
