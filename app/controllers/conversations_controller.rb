@@ -2,7 +2,7 @@
 
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[show edit update destroy]
-  #before_action :logged_in?
+  # before_action :logged_in?
 
   def logged_in?
     unless user_signed_in?
@@ -34,17 +34,17 @@ class ConversationsController < ApplicationController
     @messages = nil
     @page = params[:page].to_i
 
-    if @page * 50 > convo.messages.count 
-      @messages = convo.messages.order("created_at ASC").last(convo.messages.count)
+    if @page * 50 > convo.messages.count
+      @messages = convo.messages.order('created_at ASC').last(convo.messages.count)
       render json: { messages: @messages }
     else
       if convo.users.include? current_user
-        #@messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
-        @messages = convo.messages.order("created_at ASC").last(50 * @page)
+        # @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
+        @messages = convo.messages.order('created_at ASC').last(50 * @page)
 
       elsif !convo.topic.nil?
-        #@messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
-        @messages = convo.messages.order("created_at ASC").last(50 * @page)
+        # @messages = convo.messages.paginate(page: params[:page], per_page: 50).order("created_at ASC")
+        @messages = convo.messages.order('created_at ASC').last(50 * @page)
       end
 
       render json: { messages: @messages }
@@ -55,11 +55,9 @@ class ConversationsController < ApplicationController
     convo = Conversation.find params[:conversation_id]
     @users = nil
 
-    if convo.users.include? current_user
-        @users = convo.users
-    end
+    @users = convo.users if convo.users.include? current_user
 
-    render json: { users: @users }, except: [:email, :invite_code]
+    render json: { users: @users }, except: [:email]
   end
 
   # GET /conversations

@@ -73,6 +73,10 @@ Rails.application.routes.draw do
 
   get 'api/status', controller: 'api', action: 'status'
   post 'delete_multiple_threads', controller: 'admin', action: 'delete_multiple_threads'
+  post 'delete_threads_and_ban_users', controller: 'admin', action: 'delete_threads_and_ban_users'
+  
+  post 'delete_multiple_posts', controller: 'admin', action: 'delete_multiple_posts'
+  post 'delete_posts_and_ban_users', controller: 'admin', action: 'delete_posts_and_ban_users'
 
   root 'home#index'
 end

@@ -12,10 +12,23 @@
     <% unless @threads.nil? %>
     
         <% @threads.each do |thread| %>
-            <li class="list-group-item">
-              <% if current_user.admin? %>
-                  <%= check_box_tag "thread_ids[]", thread.id %>
+            <% if thread.soft_deleted? %>
+              <% if user_signed_in? %>
+                <% if !current_user.admin? %>
+                  <% next %>
+                <% end %>
+              <% else %>
+                <% next %>
               <% end %>
+            <% end %>
+
+            <li class="list-group-item clearfix text-dark">
+              <% if !current_user.nil? && current_user.admin? %>
+                  <%= check_box_tag "thread_ids[]", thread.id %>
+                    <% if thread.soft_deleted? %>
+                      <small>THREAD IS ONLY VIEWABLE TO ADMINS</small>
+                    <% end %>
+                  <% end %>
               <%= thread.user.first_name %>
 
               <%= link_to thread, class: 'link_no_styling' do %>
@@ -28,16 +41,23 @@
             </li>
         <% end %>
     
-      <% if current_user.admin? %>
+      <% if !current_user.nil? && current_user.admin? %>
+        <%= label_tag "Admin Actions" %> <br />
         <%= form_with(url: delete_multiple_threads_path) do |f| %>
-          <%= label_tag "Admin Actions" %> <br />
           <div class="btn-group-vertical">
               <%= f.button 'Delete', class: 'btn btn-danger' %>
+              <%= f.hidden_field :thread_ids, multiple: true %>
+          </div>
+        <% end %>
+
+        <%= form_with(url: delete_threads_and_ban_users_path) do |f| %>
+          <div class="btn-group-vertical">
               <%= f.button 'Delete and Ban User', class: 'btn btn-danger' %>
               <%= f.hidden_field :thread_ids, multiple: true %>
           </div>
         <% end %>
-          # get all checkboxed threads/posts and perform these actions on thme. 
+
+        DevNote: All checkboxed threads will have the same action applied to them (ban user, or delete user..etc).
       <% end %>
 
     <% end %>

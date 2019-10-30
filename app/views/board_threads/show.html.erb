@@ -33,7 +33,26 @@
     </li>
 
     <% @posts.each do |post| %>
+        <% if post.soft_deleted? %>
+            <% if user_signed_in? %>
+            <% if !current_user.admin? %>
+                <% next %>
+            <% end %>
+            <% else %>
+                <% next %>
+            <% end %>
+        <% end %>
+
         <li class="list-group-item clearfix text-dark">
+            <% if user_signed_in? %>
+                <% if current_user.admin? %>
+                    <%= check_box_tag "post_ids[]", post.id %>
+                    <% if post.soft_deleted? %>
+                        <small>POST IS ONLY VIEWABLE TO ADMINS</small>
+                    <% end %>
+                <% end %>
+            <% end %>
+
             <%= link_to post.user do %>
                 <%= post.user.first_name %>
             <% end %>
@@ -43,5 +62,52 @@
             </p>
         </li>
     <% end %>
+
+    <% if user_signed_in? %>
+        <% if current_user.admin? %>
+            <%= label_tag "Admin Actions" %> <br />
+            <%= form_with(url: delete_multiple_posts_path) do |f| %>
+            <div class="btn-group-vertical">
+                <%= f.button 'Delete', class: 'btn btn-danger' %>
+                <%= f.hidden_field :post_ids, multiple: true %>
+            </div>
+            <% end %>
+
+            <%= form_with(url: delete_posts_and_ban_users_path) do |f| %>
+            <div class="btn-group-vertical">
+                <%= f.button 'Delete and Ban User', class: 'btn btn-danger' %>
+                <%= f.hidden_field :post_ids, multiple: true %>
+            </div>
+            <% end %>
+
+            DevNote: All checkboxed threads will have the same action applied to them (ban user, or delete user..etc).
+        <% end %>
+    <% end %>
     <br />
 </ul>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+  var checked_checkboxes = []
+
+  $("input[type='checkbox']").on('change', function()
+  {
+    if (this.checked)
+    {
+      checked_checkboxes.push(this.value)
+      $("input[type='hidden'][id='post_ids'").val(checked_checkboxes)
+    }
+    else 
+    {
+      var base_value = this.value
+      var filteredArray = checked_checkboxes.filter(function(value, index, arr){
+          return value != base_value
+      })
+      checked_checkboxes = filteredArray
+      $("input[type='hidden'][id='post_ids']").val(checked_checkboxes)
+    }
+  })
+
+})
+</script>
