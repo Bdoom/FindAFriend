@@ -11,6 +11,7 @@ class Post extends React.Component {
               <span className="card-body">
                 <div className="text-dark">
                       {this.props.created_at}
+                      {this.props}
                       <a href={"/board_threads/" + this.props.board_thread_id}> thread</a>
                 </div>
                 <div className="text-dark">{this.props.post_body}</div>
