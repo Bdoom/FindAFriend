@@ -9,6 +9,9 @@
   </ol>
 </nav>
 
+    <%= button_to "New Thread", new_board_thread_path, params: {board: @board.id} , method: :get, class: 'btn btn-primary' %>
+    <br />
+    
     <% unless @threads.nil? %>
     
         <% @threads.each do |thread| %>
@@ -67,7 +70,6 @@
     <% end %>
     
     <br />
-    <%= button_to "New Thread", new_board_thread_path, params: {board: @board.id} , method: :get, class: 'btn btn-primary' %>
 </ul>
 
 <script type="text/javascript">

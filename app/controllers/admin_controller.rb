@@ -12,6 +12,7 @@ class AdminController < ApplicationController
     thread_ids.each do |thread_id|
       thread = BoardThread.find thread_id
       thread.soft_deleted = true
+      thread.posts.each(&:delete)
       thread.save
     end
 
@@ -25,6 +26,7 @@ class AdminController < ApplicationController
     thread_ids.each do |thread_id|
       thread = BoardThread.find thread_id
       thread.soft_deleted = true
+      thread.posts.each(&:delete)
       thread.save
 
       user = thread.user
